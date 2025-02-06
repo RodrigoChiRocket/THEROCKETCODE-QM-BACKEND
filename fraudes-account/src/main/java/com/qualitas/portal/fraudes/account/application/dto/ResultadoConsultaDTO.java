@@ -1,6 +1,8 @@
 package com.qualitas.portal.fraudes.account.application.dto;
 
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import java.math.BigDecimal;
 import java.util.Date;
 
@@ -9,10 +11,12 @@ public class ResultadoConsultaDTO {
     private String vNombre;
     private String vSexo; // Puede ser 'Hombre', 'Mujer' o 'Prefiero no especificar'
     private Integer iCodigoPostal;
+    @JsonFormat(pattern = "yyyy-MM-dd")
     private Date dFechaNacimiento;
     private BigDecimal iAutoId; // Relación con T_CATALOGO_AUTOS
     private BigDecimal iModeloId; // Relación con T_CATALOGO_AUTOS_MODELO
     private BigDecimal iAutoDescripcionId; // Relación con T_CATALO_AUTOS_DESCRIPCION
+    @JsonFormat(pattern = "yyyy-MM-dd")
     private Date dFechaCreacion;
     private BigDecimal iUsuarioCreacion;
 

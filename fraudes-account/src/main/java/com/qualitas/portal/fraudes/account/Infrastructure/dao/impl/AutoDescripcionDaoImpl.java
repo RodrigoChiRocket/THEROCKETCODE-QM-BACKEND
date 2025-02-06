@@ -21,6 +21,7 @@ public class AutoDescripcionDaoImpl implements AutoDescripcionDao {
 
     @Override
     public AutoDescripcion crearAuto(AutoDescripcion autoDescripcion) {
+        // Asegúrate de que el nombre del método en MyBatis coincida con el nombre aquí
         sqlSession.insert("com.qualitas.portal.fraudes.account.Infrastructure.dao.AutoDescripcionDao.crearAutoDescripcion", autoDescripcion);
         return autoDescripcion;
     }
