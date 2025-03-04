@@ -17,7 +17,6 @@ public class AutoMarcaConvertDTOImpl implements AutoMarcaConvertDTO {
         autoMarcaDTO.setiAutoMarcaId(autoMarca.getiAutoMarcaId());
         autoMarcaDTO.setvNombre(autoMarca.getvNombre());
         autoMarcaDTO.setdFechaCreacion(autoMarca.getdFechaCreacion());
-        autoMarcaDTO.setiUsuarioCreacion(autoMarca.getiUsuarioCreacion());
 
         return autoMarcaDTO;
     }
@@ -29,7 +28,6 @@ public class AutoMarcaConvertDTOImpl implements AutoMarcaConvertDTO {
         autoMarca.setiAutoMarcaId(autoMarcaDTO.getiAutoMarcaId());
         autoMarca.setvNombre(autoMarcaDTO.getvNombre());
         autoMarca.setdFechaCreacion(autoMarcaDTO.getdFechaCreacion());
-        autoMarca.setiUsuarioCreacion(autoMarcaDTO.getiUsuarioCreacion());
 
         return autoMarca;
     }

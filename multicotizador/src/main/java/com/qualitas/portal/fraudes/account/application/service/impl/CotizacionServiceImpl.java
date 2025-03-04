@@ -2,14 +2,10 @@ package com.qualitas.portal.fraudes.account.application.service.impl;
 
 
 import com.qualitas.portal.fraudes.account.Infrastructure.dao.CotizacionDao;
-import com.qualitas.portal.fraudes.account.application.dto.AutoDTO;
-import com.qualitas.portal.fraudes.account.application.dto.CotizacionDTO;
-import com.qualitas.portal.fraudes.account.application.dto.PersonaDTO;
+import com.qualitas.portal.fraudes.account.application.dto.*;
 import com.qualitas.portal.fraudes.account.application.dto.request.CotizacionCompletaDTO;
 import com.qualitas.portal.fraudes.account.application.dto.response.CotizacionCompletaResponseDTO;
-import com.qualitas.portal.fraudes.account.application.service.AutoService;
-import com.qualitas.portal.fraudes.account.application.service.CotizacionService;
-import com.qualitas.portal.fraudes.account.application.service.PersonaService;
+import com.qualitas.portal.fraudes.account.application.service.*;
 import com.qualitas.portal.fraudes.account.domain.model.Cotizacion;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,6 +23,14 @@ public class CotizacionServiceImpl implements CotizacionService {
 
     @Autowired
     private AutoService autoService;
+    @Autowired
+    private TipoAutoService tipoAutoService;
+    @Autowired
+    private CategoriaVehiculoService categoriaVehiculoService;
+    @Autowired
+    private UsoService usoService;
+    @Autowired
+    private TipoSeguroService tipoSeguroService;
 
 
     @Autowired
@@ -48,22 +52,31 @@ public class CotizacionServiceImpl implements CotizacionService {
     }
 
     // Convertir de Model a DTO
-    private CotizacionDTO convertToDTO(Cotizacion cotizacion) {
-        CotizacionDTO dto = new CotizacionDTO();
-        dto.setiCotizacionId(cotizacion.getiCotizacionId());
-        dto.setiCategoriaVehiculoClave(cotizacion.getiCategoriaVehiculoClave());
-        dto.setiTipoSeguroClave(cotizacion.getiTipoSeguroClave());
-        dto.setiUsoClave(cotizacion.getiUsoClave());
-        dto.setiTipoAutoClave(cotizacion.getiTipoAutoClave());
-        dto.setiAutoClave(cotizacion.getiAutoClave());
-        dto.setiPersonaClave(cotizacion.getiPersonaClave());
-        dto.setdFechaCreacion(cotizacion.getdFechaCreacion());
-        dto.setiUsuarioCreacion(cotizacion.getiUsuarioCreacion());
-        return dto;
-    }
+
+
 
     @Override
     public CotizacionCompletaResponseDTO crearCotizacionCompleta(CotizacionCompletaDTO cotizacionCompletaDTO) {
+        // Obtener los nombres de las entidades relacionadas
+        UsoDTO usoDTO = usoService.obtenerUso(cotizacionCompletaDTO.getCotizacion().getiUsoClave());
+        CategoriaVehiculoDTO categoriaVehiculoDTO = categoriaVehiculoService.obtenerCategoriaVehiculo(cotizacionCompletaDTO.getCotizacion().getiCategoriaVehiculoClave());
+        TipoSeguroDTO tipoSeguroDTO = tipoSeguroService.obtenerTipoSeguro(cotizacionCompletaDTO.getCotizacion().getiTipoSeguroClave());
+        TipoAutoDTO tipoAutoDTO = tipoAutoService.obtenerTipoAuto(cotizacionCompletaDTO.getCotizacion().getiTipoAutoClave());
+
+        // Verificar que los nombres no sean null
+        if (usoDTO == null || usoDTO.getvNombre() == null) {
+            throw new RuntimeException("No se encontró el uso con ID: " + cotizacionCompletaDTO.getCotizacion().getiUsoClave());
+        }
+        if (categoriaVehiculoDTO == null || categoriaVehiculoDTO.getvNombre() == null) {
+            throw new RuntimeException("No se encontró la categoría de vehículo con ID: " + cotizacionCompletaDTO.getCotizacion().getiCategoriaVehiculoClave());
+        }
+        if (tipoSeguroDTO == null || tipoSeguroDTO.getvNombre() == null) {
+            throw new RuntimeException("No se encontró el tipo de seguro con ID: " + cotizacionCompletaDTO.getCotizacion().getiTipoSeguroClave());
+        }
+        if (tipoAutoDTO == null || tipoAutoDTO.getvNombre() == null) {
+            throw new RuntimeException("No se encontró el tipo de auto con ID: " + cotizacionCompletaDTO.getCotizacion().getiTipoAutoClave());
+        }
+
         // 1. Crear la Persona
         PersonaDTO personaDTO = cotizacionCompletaDTO.getPersona();
         PersonaDTO personaCreada = personaService.crearPersona(personaDTO);
@@ -78,11 +91,21 @@ public class CotizacionServiceImpl implements CotizacionService {
         CotizacionDTO cotizacionDTO = cotizacionCompletaDTO.getCotizacion();
         cotizacionDTO.setiPersonaClave(personaId);
         cotizacionDTO.setiAutoClave(autoId);
+        cotizacionDTO.setvNombreUso(usoDTO.getvNombre());
+        cotizacionDTO.setvNombreCategoriaVehiculo(categoriaVehiculoDTO.getvNombre());
+        cotizacionDTO.setvNombreTipoSeguro(tipoSeguroDTO.getvNombre());
+        cotizacionDTO.setvNombreTipoAUto(tipoAutoDTO.getvNombre());
 
         // 4. Crear la Cotización
         Cotizacion cotizacion = convertToModel(cotizacionDTO);
         cotizacionDao.crearCotizacion(cotizacion);
         CotizacionDTO cotizacionCreada = convertToDTO(cotizacion);
+
+        // Asignar los nombres al CotizacionDTO creado
+        cotizacionCreada.setvNombreUso(usoDTO.getvNombre());
+        cotizacionCreada.setvNombreCategoriaVehiculo(categoriaVehiculoDTO.getvNombre());
+        cotizacionCreada.setvNombreTipoSeguro(tipoSeguroDTO.getvNombre());
+        cotizacionCreada.setvNombreTipoAUto(tipoAutoDTO.getvNombre());
 
         // 5. Crear y devolver el DTO de respuesta
         CotizacionCompletaResponseDTO responseDTO = new CotizacionCompletaResponseDTO();
@@ -93,6 +116,20 @@ public class CotizacionServiceImpl implements CotizacionService {
         return responseDTO;
     }
 
+    // Convertir de Model a DTO
+    private CotizacionDTO convertToDTO(Cotizacion cotizacion) {
+        CotizacionDTO dto = new CotizacionDTO();
+        dto.setiCotizacionId(cotizacion.getiCotizacionId());
+        dto.setiCategoriaVehiculoClave(cotizacion.getiCategoriaVehiculoClave());
+        dto.setiTipoSeguroClave(cotizacion.getiTipoSeguroClave());
+        dto.setiUsoClave(cotizacion.getiUsoClave());
+        dto.setiTipoAutoClave(cotizacion.getiTipoAutoClave());
+        dto.setiAutoClave(cotizacion.getiAutoClave());
+        dto.setiPersonaClave(cotizacion.getiPersonaClave());
+        dto.setdFechaCreacion(cotizacion.getdFechaCreacion());
+        dto.setiUsuarioCreacion(cotizacion.getiUsuarioCreacion());
+        return dto;
+    }
     @Override
     public CotizacionDTO crearCotizacion(CotizacionDTO cotizacionDTO) {
         Cotizacion cotizacion = convertToModel(cotizacionDTO);

@@ -10,12 +10,9 @@ public class AutoDescripcionConvertDTOImpl implements AutoDescripcionConvertDTO 
 
     @Override
     public AutoDescripcionDTO entityToDto(AutoDescripcion autoDescripcion) {
-        if (autoDescripcion == null) {
-            return null;
-        }
         AutoDescripcionDTO autoDescripcionDTO = new AutoDescripcionDTO();
-        autoDescripcionDTO.setiCatalogoAutoDescripcionId(autoDescripcion.getiAutoDescripcionId());
-        autoDescripcionDTO.setiAutoModeloClave(autoDescripcion.getiAutoModeloClave());  // Obtener el ID del modelo
+        autoDescripcionDTO.setiAutoDescripcionId(autoDescripcion.getiAutoDescripcionId());
+        autoDescripcionDTO.setiAutoModeloClave(autoDescripcion.getiAutoModeloClave());
         autoDescripcionDTO.setvNombre(autoDescripcion.getvNombre());
         autoDescripcionDTO.setdFechaCreacion(autoDescripcion.getdFechaCreacion());
         autoDescripcionDTO.setiUsuarioCreacion(autoDescripcion.getiUsuarioCreacion());
@@ -24,14 +21,9 @@ public class AutoDescripcionConvertDTOImpl implements AutoDescripcionConvertDTO 
 
     @Override
     public AutoDescripcion dtoToEntity(AutoDescripcionDTO autoDescripcionDTO) {
-        if (autoDescripcionDTO == null) {
-            return null;
-        }
         AutoDescripcion autoDescripcion = new AutoDescripcion();
-        autoDescripcion.setiAutoDescripcionId(autoDescripcionDTO.getiCatalogoAutoDescripcionId());
-
-        autoDescripcion.setiAutoModeloClave(autoDescripcion.getiAutoModeloClave());
-
+        autoDescripcion.setiAutoDescripcionId(autoDescripcionDTO.getiAutoDescripcionId());
+        autoDescripcion.setiAutoModeloClave(autoDescripcionDTO.getiAutoModeloClave());
         autoDescripcion.setvNombre(autoDescripcionDTO.getvNombre());
         autoDescripcion.setdFechaCreacion(autoDescripcionDTO.getdFechaCreacion());
         autoDescripcion.setiUsuarioCreacion(autoDescripcionDTO.getiUsuarioCreacion());

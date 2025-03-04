@@ -1,10 +1,16 @@
 package com.qualitas.portal.fraudes.account.application.service.impl;
 
 import com.qualitas.portal.fraudes.account.Infrastructure.dao.AutoDao;
+import com.qualitas.portal.fraudes.account.Infrastructure.dao.AutoDescripcionDao;
+import com.qualitas.portal.fraudes.account.Infrastructure.dao.AutoMarcaDao;
+import com.qualitas.portal.fraudes.account.Infrastructure.dao.AutoModeloDao;
 import com.qualitas.portal.fraudes.account.application.convertDTO.AutoConvertDTO;
 import com.qualitas.portal.fraudes.account.application.dto.AutoDTO;
 import com.qualitas.portal.fraudes.account.application.service.AutoService;
 import com.qualitas.portal.fraudes.account.domain.model.Auto;
+import com.qualitas.portal.fraudes.account.domain.model.AutoDescripcion;
+import com.qualitas.portal.fraudes.account.domain.model.AutoMarca;
+import com.qualitas.portal.fraudes.account.domain.model.AutoModelo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.slf4j.Logger;
@@ -23,6 +29,15 @@ public class AutoServiceImpl implements AutoService {
     private AutoDao autoDAO;
 
     @Autowired
+    private AutoMarcaDao autoMarcaDao;
+
+    @Autowired
+    private AutoModeloDao autoModeloDao;
+
+    @Autowired
+    private AutoDescripcionDao autoDescripcionDao;
+
+    @Autowired
     private AutoConvertDTO autoConvertDTO;
 
     @Override
@@ -33,7 +48,20 @@ public class AutoServiceImpl implements AutoService {
         logger.info("iAutoDescripcionClave antes de guardar: {}", auto.getiAutoDescripcionClave()); // Log del valor antes de guardar
         autoDAO.crearAuto(auto);
         logger.info("Auto guardado con éxito en la base de datos: {}", auto);
-        return autoConvertDTO.entityToDto(auto);
+
+        AutoMarca autoMarca= autoMarcaDao.obtenerAutoMarca(autoDTO.getiAutoMarcaClave());
+        AutoModelo autoModelo = autoModeloDao.obtenerAuto(autoDTO.getiAutoModeloClave());
+        AutoDescripcion autoDescripcion = autoDescripcionDao.obtenerAuto(autoDTO.getiAutoDescripcionClave());
+
+        AutoDTO autoDTO1= autoConvertDTO.entityToDto(auto);
+
+        autoDTO1.setvNombreMarca(autoMarca.getvNombre());
+        autoDTO1.setvNombreModelo(autoModelo.getvNombre());
+        autoDTO1.setvNombreDescripcion(autoDescripcion.getvNombre());
+
+
+
+        return autoDTO1;
     }
 
     @Override

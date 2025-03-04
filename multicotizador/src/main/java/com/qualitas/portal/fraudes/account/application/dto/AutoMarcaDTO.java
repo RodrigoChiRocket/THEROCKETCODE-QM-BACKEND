@@ -7,7 +7,7 @@ public class AutoMarcaDTO {
     private BigDecimal iAutoMarcaId;
     private String vNombre;
     private Date dFechaCreacion;
-    private BigDecimal iUsuarioCreacion;
+
 
     // Getters y setters
     public BigDecimal getiAutoMarcaId() {
@@ -34,11 +34,5 @@ public class AutoMarcaDTO {
         this.dFechaCreacion = dFechaCreacion;
     }
 
-    public BigDecimal getiUsuarioCreacion() {
-        return iUsuarioCreacion;
-    }
 
-    public void setiUsuarioCreacion(BigDecimal iUsuarioCreacion) {
-        this.iUsuarioCreacion = iUsuarioCreacion;
-    }
 }
