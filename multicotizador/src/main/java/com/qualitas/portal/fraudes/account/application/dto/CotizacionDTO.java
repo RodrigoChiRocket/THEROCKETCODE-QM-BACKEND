@@ -6,13 +6,49 @@ import java.util.Date;
 public class CotizacionDTO {
     private BigDecimal iCotizacionId;
     private BigDecimal iCategoriaVehiculoClave;
+    private String vNombreCategoriaVehiculo;
     private BigDecimal iTipoSeguroClave;
+    private String vNombreTipoSeguro;
     private BigDecimal iUsoClave;
+    private String vNombreUso;
     private BigDecimal iTipoAutoClave;
+    private  String vNombreTipoAUto;
     private BigDecimal iAutoClave;
     private BigDecimal iPersonaClave;
     private Date dFechaCreacion;
     private String iUsuarioCreacion;
+
+    public String getvNombreCategoriaVehiculo() {
+        return vNombreCategoriaVehiculo;
+    }
+
+    public void setvNombreCategoriaVehiculo(String vNombreCategoriaVehiculo) {
+        this.vNombreCategoriaVehiculo = vNombreCategoriaVehiculo;
+    }
+
+    public String getvNombreTipoSeguro() {
+        return vNombreTipoSeguro;
+    }
+
+    public void setvNombreTipoSeguro(String vNombreTipoSeguro) {
+        this.vNombreTipoSeguro = vNombreTipoSeguro;
+    }
+
+    public String getvNombreUso() {
+        return vNombreUso;
+    }
+
+    public void setvNombreUso(String vNombreUso) {
+        this.vNombreUso = vNombreUso;
+    }
+
+    public String getvNombreTipoAUto() {
+        return vNombreTipoAUto;
+    }
+
+    public void setvNombreTipoAUto(String vNombreTipoAUto) {
+        this.vNombreTipoAUto = vNombreTipoAUto;
+    }
 
     // Getters y Setters
     public BigDecimal getiCotizacionId() {

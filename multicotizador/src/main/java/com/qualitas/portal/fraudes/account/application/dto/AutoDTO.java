@@ -12,10 +12,42 @@ public class AutoDTO {
     @JsonFormat(pattern = "yyyy-MM-dd")
     private Date dFechaCreacion;
     private BigDecimal iUsuarioCreacion;
+
+
     private BigDecimal iAutoMarcaClave;  // Relación con AutoMarca DTO
+    private String vNombreMarca;
+
+
+    private BigDecimal iAutoModeloClave;
+    private String vNombreModelo;
 
     private BigDecimal iAutoDescripcionClave;
-    private BigDecimal iAutoModeloClave;
+    private String vNombreDescripcion;
+
+
+    public String getvNombreDescripcion() {
+        return vNombreDescripcion;
+    }
+
+    public void setvNombreDescripcion(String vNombreDescripcion) {
+        this.vNombreDescripcion = vNombreDescripcion;
+    }
+
+    public String getvNombreModelo() {
+        return vNombreModelo;
+    }
+
+    public String getvNombreMarca() {
+        return vNombreMarca;
+    }
+
+    public void setvNombreMarca(String vNombreMarca) {
+        this.vNombreMarca = vNombreMarca;
+    }
+
+    public void setvNombreModelo(String vNombreModelo) {
+        this.vNombreModelo = vNombreModelo;
+    }
 
     public BigDecimal getiAutoDescripcionClave() {
         return iAutoDescripcionClave;

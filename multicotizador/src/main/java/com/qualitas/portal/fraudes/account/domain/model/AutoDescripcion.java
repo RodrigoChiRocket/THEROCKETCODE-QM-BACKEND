@@ -4,19 +4,11 @@ import java.math.BigDecimal;
 import java.util.Date;
 
 public class AutoDescripcion {
-    private BigDecimal iAutoDescripcionId;  // ID de la descripción del modelo
-    private BigDecimal iAutoModeloClave;                   // ID del modelo (relación con T_CATALOGO_AUTOS_MODELO)
-    private String vNombre;                    // Descripción del modelo de auto
-    private Date dFechaCreacion;
-    private BigDecimal iUsuarioCreacion;
-
-    public BigDecimal getiAutoModeloClave() {
-        return iAutoModeloClave;
-    }
-
-    public void setiAutoModeloClave(BigDecimal iAutoModeloClave) {
-        this.iAutoModeloClave = iAutoModeloClave;
-    }
+    private BigDecimal iAutoDescripcionId;  // ID de la descripción del auto
+    private BigDecimal iAutoModeloClave;   // Clave del modelo (relación con T_AUTOS_MODELO_MC)
+    private String vNombre;                // Nombre de la descripción
+    private Date dFechaCreacion;           // Fecha de creación
+    private BigDecimal iUsuarioCreacion;   // ID del usuario que creó el registro
 
     // Getters y Setters
     public BigDecimal getiAutoDescripcionId() {
@@ -27,6 +19,13 @@ public class AutoDescripcion {
         this.iAutoDescripcionId = iAutoDescripcionId;
     }
 
+    public BigDecimal getiAutoModeloClave() {
+        return iAutoModeloClave;
+    }
+
+    public void setiAutoModeloClave(BigDecimal iAutoModeloClave) {
+        this.iAutoModeloClave = iAutoModeloClave;
+    }
 
     public String getvNombre() {
         return vNombre;

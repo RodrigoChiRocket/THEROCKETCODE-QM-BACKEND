@@ -6,7 +6,6 @@ public class AutoMarca {
     private java.math.BigDecimal iAutoMarcaId;
     private String vNombre;
     private Date dFechaCreacion;
-    private java.math.BigDecimal iUsuarioCreacion;
 
     // Getters y setters
     public java.math.BigDecimal getiAutoMarcaId() {
@@ -33,11 +32,5 @@ public class AutoMarca {
         this.dFechaCreacion = dFechaCreacion;
     }
 
-    public java.math.BigDecimal getiUsuarioCreacion() {
-        return iUsuarioCreacion;
-    }
 
-    public void setiUsuarioCreacion(java.math.BigDecimal iUsuarioCreacion) {
-        this.iUsuarioCreacion = iUsuarioCreacion;
-    }
 }
