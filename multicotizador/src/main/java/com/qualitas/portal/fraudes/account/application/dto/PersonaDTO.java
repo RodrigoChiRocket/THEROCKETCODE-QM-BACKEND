@@ -14,7 +14,7 @@ public class PersonaDTO {
     private String vNombre;
     private Sexo vSexo;
     private Integer iCodigoPostal;
-    @JsonFormat(pattern = "yyyy-MM-dd")
+    @JsonFormat(pattern = "dd-MM-yyyy")
     private Date dFechaNacimiento;
 
     private String vCorreo;

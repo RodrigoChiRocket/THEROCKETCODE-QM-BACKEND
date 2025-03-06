@@ -63,19 +63,7 @@ public class CotizacionServiceImpl implements CotizacionService {
         TipoSeguroDTO tipoSeguroDTO = tipoSeguroService.obtenerTipoSeguro(cotizacionCompletaDTO.getCotizacion().getiTipoSeguroClave());
         TipoAutoDTO tipoAutoDTO = tipoAutoService.obtenerTipoAuto(cotizacionCompletaDTO.getCotizacion().getiTipoAutoClave());
 
-        // Verificar que los nombres no sean null
-        if (usoDTO == null || usoDTO.getvNombre() == null) {
-            throw new RuntimeException("No se encontró el uso con ID: " + cotizacionCompletaDTO.getCotizacion().getiUsoClave());
-        }
-        if (categoriaVehiculoDTO == null || categoriaVehiculoDTO.getvNombre() == null) {
-            throw new RuntimeException("No se encontró la categoría de vehículo con ID: " + cotizacionCompletaDTO.getCotizacion().getiCategoriaVehiculoClave());
-        }
-        if (tipoSeguroDTO == null || tipoSeguroDTO.getvNombre() == null) {
-            throw new RuntimeException("No se encontró el tipo de seguro con ID: " + cotizacionCompletaDTO.getCotizacion().getiTipoSeguroClave());
-        }
-        if (tipoAutoDTO == null || tipoAutoDTO.getvNombre() == null) {
-            throw new RuntimeException("No se encontró el tipo de auto con ID: " + cotizacionCompletaDTO.getCotizacion().getiTipoAutoClave());
-        }
+
 
         // 1. Crear la Persona
         PersonaDTO personaDTO = cotizacionCompletaDTO.getPersona();
