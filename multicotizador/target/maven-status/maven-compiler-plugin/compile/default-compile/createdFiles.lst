@@ -1,9 +1,11 @@
+com\qualitas\portal\fraudes\account\application\service\impl\ResultadoCotizacionServiceImpl.class
 com\qualitas\portal\fraudes\account\application\service\UsoService.class
 com\qualitas\portal\fraudes\account\application\service\TipoSeguroService.class
 com\qualitas\portal\fraudes\account\util\validacionContrasena\VLongitud.class
 com\qualitas\portal\fraudes\account\Infrastructure\dao\impl\AutoMarcaDaoImpl.class
 com\qualitas\portal\fraudes\account\Infrastructure\dao\impl\RolDaoImpl.class
 com\qualitas\portal\fraudes\account\application\service\impl\UsuarioServiceImpl.class
+com\qualitas\portal\fraudes\account\application\convertDTO\impl\ResultadoCotizacionConvertDTOImpl.class
 com\qualitas\portal\fraudes\account\application\service\impl\RutinaCargaServiceImpl.class
 com\qualitas\portal\fraudes\account\Infrastructure\dao\impl\AutoDaoImpl.class
 com\qualitas\portal\fraudes\account\application\service\impl\TipoAutoServiceImpl.class
@@ -18,6 +20,7 @@ com\qualitas\portal\fraudes\account\domain\model\TipoAuto.class
 com\qualitas\portal\fraudes\account\Infrastructure\dao\UsuarioDao.class
 com\qualitas\portal\fraudes\account\util\email\EnvioCorreo$1.class
 com\qualitas\portal\fraudes\account\util\email\EnvioCorreo.class
+com\qualitas\portal\fraudes\account\domain\dto\ResultadoCotizacionDTO.class
 com\qualitas\portal\fraudes\account\domain\model\CategoriaVehiculo.class
 com\qualitas\portal\fraudes\account\application\service\impl\CorreoServiceImpl$1.class
 com\qualitas\portal\fraudes\account\Infrastructure\dao\AutoMarcaDao.class
@@ -35,6 +38,7 @@ com\qualitas\portal\fraudes\account\Infrastructure\dao\impl\PersonaDaoImpl.class
 com\qualitas\portal\fraudes\account\util\jwt\JwtUtil.class
 com\qualitas\portal\fraudes\account\util\validacionContrasena\VContrasena.class
 com\qualitas\portal\fraudes\account\domain\model\Auto.class
+com\qualitas\portal\fraudes\account\Infrastructure\dao\ResultadoCotizacionDao.class
 com\qualitas\portal\fraudes\account\application\service\RestablecerContrasenaService.class
 com\qualitas\portal\fraudes\account\application\dto\PersonaDTO.class
 com\qualitas\portal\fraudes\account\application\dto\TipoAutoDTO.class
@@ -53,6 +57,7 @@ com\qualitas\portal\fraudes\account\Infrastructure\dao\CotizacionDao.class
 com\qualitas\portal\fraudes\account\application\dto\request\CredencialesDto.class
 com\qualitas\portal\fraudes\account\domain\model\Cotizacion.class
 com\qualitas\portal\fraudes\account\application\convertDTO\impl\TipoSeguroConvertDTOImpl.class
+com\qualitas\portal\fraudes\account\domain\model\ResultadoCotizacion.class
 com\qualitas\portal\fraudes\account\application\service\AutoService.class
 com\qualitas\portal\fraudes\account\Infrastructure\dao\impl\CotizacionDaoImpl.class
 com\qualitas\portal\fraudes\account\Infrastructure\dao\TipoAutoDao.class
@@ -66,6 +71,7 @@ com\qualitas\portal\fraudes\account\Infrastructure\dao\impl\RutinaCargaDaoImpl.c
 com\qualitas\portal\fraudes\account\application\service\CheckService.class
 com\qualitas\portal\fraudes\account\application\service\CotizacionService.class
 com\qualitas\portal\fraudes\account\application\convertDTO\PersonaConvertDTO.class
+com\qualitas\portal\fraudes\account\application\convertDTO\ResultadoCotizacionConvertDTO.class
 com\qualitas\portal\fraudes\account\application\dto\response\InicioSesionRespuestaDto.class
 com\qualitas\portal\fraudes\account\application\service\PersonaService.class
 com\qualitas\portal\fraudes\account\application\service\impl\CategoriaVehiculoServiceImpl.class
@@ -103,7 +109,9 @@ com\qualitas\portal\fraudes\account\Infrastructure\dao\impl\UsoDaoImpl.class
 com\qualitas\portal\fraudes\account\application\convertDTO\CategoriaVehiculoConvertDTO.class
 com\qualitas\portal\fraudes\account\application\convertDTO\impl\AutoModeloConvertDTOImpl.class
 com\qualitas\portal\fraudes\account\application\service\impl\AutoServiceImpl.class
+com\qualitas\portal\fraudes\account\Infrastructure\dao\impl\ResultadoCotizacionDaoImpl.class
 com\qualitas\portal\fraudes\account\application\service\impl\AutoMarcaServiceImpl.class
+com\qualitas\portal\fraudes\account\application\service\ResultadoCotizacionService.class
 com\qualitas\portal\fraudes\account\application\service\AutenticacionService.class
 com\qualitas\portal\fraudes\account\application\service\impl\CodigoEmailServiceImpl.class
 com\qualitas\portal\fraudes\account\application\service\RolService.class
