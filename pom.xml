@@ -10,7 +10,7 @@
 	<url>http://maven.apache.org</url>
 
 	<modules>
-		<module>fraudes-account</module>
+		<module>multicotizador</module>
 	</modules>
 
 	<properties>
