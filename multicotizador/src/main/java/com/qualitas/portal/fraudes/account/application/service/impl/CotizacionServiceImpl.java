@@ -64,7 +64,6 @@ public class CotizacionServiceImpl implements CotizacionService {
         TipoAutoDTO tipoAutoDTO = tipoAutoService.obtenerTipoAuto(cotizacionCompletaDTO.getCotizacion().getiTipoAutoClave());
 
 
-
         // 1. Crear la Persona
         PersonaDTO personaDTO = cotizacionCompletaDTO.getPersona();
         PersonaDTO personaCreada = personaService.crearPersona(personaDTO);
