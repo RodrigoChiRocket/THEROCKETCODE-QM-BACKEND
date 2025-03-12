@@ -54,10 +54,6 @@ public class ResultadoCotizacionServiceImpl implements ResultadoCotizacionServic
         resultadoCotizacionDao.eliminarResultadoCotizacion(id);
     }
 
-    @Override
-    public boolean verificarExistenciaDeDatos() {
-        return resultadoCotizacionDao.existenDatos();
-    }
 
 
     @Override
@@ -84,6 +80,11 @@ public class ResultadoCotizacionServiceImpl implements ResultadoCotizacionServic
     @Override
     public List<String> obtenerNombresSegurosUnicos() {
         return resultadoCotizacionDao.obtenerNombresSegurosUnicos();
+    }
+
+    @Override
+    public boolean verificarEstadoCotizacion(BigDecimal cotizacionClave) {
+        return resultadoCotizacionDao.verificarEstadoCotizacion(cotizacionClave);
     }
 
 }

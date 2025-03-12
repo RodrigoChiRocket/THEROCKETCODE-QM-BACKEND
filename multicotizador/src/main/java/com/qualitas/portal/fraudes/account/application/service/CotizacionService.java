@@ -15,4 +15,5 @@ public interface CotizacionService {
     CotizacionDTO actualizarCotizacion(CotizacionDTO cotizacionDTO);
     void eliminarCotizacion(BigDecimal id);
     List<CotizacionDTO> listarTodasLasCotizaciones();
+
 }

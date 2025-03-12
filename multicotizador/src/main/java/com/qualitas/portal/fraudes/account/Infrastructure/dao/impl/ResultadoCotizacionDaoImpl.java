@@ -48,11 +48,6 @@ public class ResultadoCotizacionDaoImpl implements ResultadoCotizacionDao {
         sqlSession.delete("com.qualitas.portal.fraudes.account.infrastructure.dao.ResultadoCotizacionDao.eliminarResultadoCotizacion", id);
     }
 
-    @Override
-    public boolean existenDatos() {
-        Integer count = sqlSession.selectOne("com.qualitas.portal.fraudes.account.infrastructure.dao.ResultadoCotizacionDao.existenDatos");
-        return count != null && count > 0;
-    }
 
     @Override
     public List<ResultadoCotizacion> obtenerResultadoPorCotizacionClave(BigDecimal cotizacionClave) {
@@ -77,6 +72,14 @@ public class ResultadoCotizacionDaoImpl implements ResultadoCotizacionDao {
     public List<String> obtenerNombresSegurosUnicos() {
         return sqlSession.selectList(
                 "com.qualitas.portal.fraudes.account.infrastructure.dao.ResultadoCotizacionDao.obtenerNombresSegurosUnicos"
+        );
+    }
+
+    @Override
+    public boolean verificarEstadoCotizacion(BigDecimal cotizacionClave) {
+        return sqlSession.selectOne(
+                "com.qualitas.portal.fraudes.account.infrastructure.dao.ResultadoCotizacionDao.verificarEstadoCotizacion",
+                cotizacionClave
         );
     }
 }

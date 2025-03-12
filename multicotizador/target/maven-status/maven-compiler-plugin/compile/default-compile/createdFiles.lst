@@ -1,7 +1,4 @@
-<<<<<<< HEAD
 com\qualitas\portal\fraudes\account\application\service\impl\ResultadoCotizacionServiceImpl.class
-=======
->>>>>>> refs/remotes/origin/Develop-Rafael2
 com\qualitas\portal\fraudes\account\application\service\UsoService.class
 com\qualitas\portal\fraudes\account\application\service\TipoSeguroService.class
 com\qualitas\portal\fraudes\account\util\validacionContrasena\VLongitud.class
@@ -23,10 +20,7 @@ com\qualitas\portal\fraudes\account\domain\model\TipoAuto.class
 com\qualitas\portal\fraudes\account\Infrastructure\dao\UsuarioDao.class
 com\qualitas\portal\fraudes\account\util\email\EnvioCorreo$1.class
 com\qualitas\portal\fraudes\account\util\email\EnvioCorreo.class
-<<<<<<< HEAD
 com\qualitas\portal\fraudes\account\domain\dto\ResultadoCotizacionDTO.class
-=======
->>>>>>> refs/remotes/origin/Develop-Rafael2
 com\qualitas\portal\fraudes\account\domain\model\CategoriaVehiculo.class
 com\qualitas\portal\fraudes\account\application\service\impl\CorreoServiceImpl$1.class
 com\qualitas\portal\fraudes\account\Infrastructure\dao\AutoMarcaDao.class
@@ -63,10 +57,7 @@ com\qualitas\portal\fraudes\account\Infrastructure\dao\CotizacionDao.class
 com\qualitas\portal\fraudes\account\application\dto\request\CredencialesDto.class
 com\qualitas\portal\fraudes\account\domain\model\Cotizacion.class
 com\qualitas\portal\fraudes\account\application\convertDTO\impl\TipoSeguroConvertDTOImpl.class
-<<<<<<< HEAD
 com\qualitas\portal\fraudes\account\domain\model\ResultadoCotizacion.class
-=======
->>>>>>> refs/remotes/origin/Develop-Rafael2
 com\qualitas\portal\fraudes\account\application\service\AutoService.class
 com\qualitas\portal\fraudes\account\Infrastructure\dao\impl\CotizacionDaoImpl.class
 com\qualitas\portal\fraudes\account\Infrastructure\dao\TipoAutoDao.class
@@ -118,13 +109,9 @@ com\qualitas\portal\fraudes\account\Infrastructure\dao\impl\UsoDaoImpl.class
 com\qualitas\portal\fraudes\account\application\convertDTO\CategoriaVehiculoConvertDTO.class
 com\qualitas\portal\fraudes\account\application\convertDTO\impl\AutoModeloConvertDTOImpl.class
 com\qualitas\portal\fraudes\account\application\service\impl\AutoServiceImpl.class
-<<<<<<< HEAD
 com\qualitas\portal\fraudes\account\Infrastructure\dao\impl\ResultadoCotizacionDaoImpl.class
 com\qualitas\portal\fraudes\account\application\service\impl\AutoMarcaServiceImpl.class
 com\qualitas\portal\fraudes\account\application\service\ResultadoCotizacionService.class
-=======
-com\qualitas\portal\fraudes\account\application\service\impl\AutoMarcaServiceImpl.class
->>>>>>> refs/remotes/origin/Develop-Rafael2
 com\qualitas\portal\fraudes\account\application\service\AutenticacionService.class
 com\qualitas\portal\fraudes\account\application\service\impl\CodigoEmailServiceImpl.class
 com\qualitas\portal\fraudes\account\application\service\RolService.class

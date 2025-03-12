@@ -13,7 +13,6 @@ public interface ResultadoCotizacionDao {
     ResultadoCotizacion actualizarResultadoCotizacion(ResultadoCotizacion resultado);
     void eliminarResultadoCotizacion(BigDecimal id);
 
-    boolean existenDatos();
      List<ResultadoCotizacion> obtenerResultadoPorCotizacionClave(BigDecimal cotizacionClave);
 
     List<ResultadoCotizacion> buscarPorNombreSeguroYCotizacionClave(
@@ -22,4 +21,6 @@ public interface ResultadoCotizacionDao {
     );
 
     List<String> obtenerNombresSegurosUnicos();
+
+    boolean verificarEstadoCotizacion(BigDecimal cotizacionClave); // Cambiado a boolean
 }

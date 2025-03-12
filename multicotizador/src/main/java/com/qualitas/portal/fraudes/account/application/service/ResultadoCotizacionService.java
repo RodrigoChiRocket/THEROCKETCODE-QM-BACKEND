@@ -11,7 +11,8 @@ public interface ResultadoCotizacionService {
     ResultadoCotizacionDTO actualizarResultadoCotizacion(BigDecimal id, ResultadoCotizacionDTO dto);
     void eliminarResultadoCotizacion(BigDecimal id);
 
-    boolean verificarExistenciaDeDatos();
+    boolean verificarEstadoCotizacion(BigDecimal cotizacionClave);
+
 
     List<ResultadoCotizacionDTO> obtenerResultadoPorCotizacionClave(BigDecimal cotizacionClave);
 
