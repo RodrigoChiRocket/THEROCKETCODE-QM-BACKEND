@@ -82,4 +82,13 @@ public class ResultadoCotizacionDaoImpl implements ResultadoCotizacionDao {
                 cotizacionClave
         );
     }
+
+
+    @Override
+    public List<ResultadoCotizacion> filtrarResultadosCotizacion(Map<String, Object> parametros) {
+        return sqlSession.selectList(
+                "com.qualitas.portal.fraudes.account.infrastructure.dao.ResultadoCotizacionDao.filtrarResultadosCotizacion",
+                parametros
+        );
+    }
 }

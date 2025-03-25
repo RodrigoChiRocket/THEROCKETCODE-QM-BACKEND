@@ -9,7 +9,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 @Service
@@ -85,6 +87,21 @@ public class ResultadoCotizacionServiceImpl implements ResultadoCotizacionServic
     @Override
     public boolean verificarEstadoCotizacion(BigDecimal cotizacionClave) {
         return resultadoCotizacionDao.verificarEstadoCotizacion(cotizacionClave);
+    }
+
+
+    @Override
+    public List<ResultadoCotizacionDTO> filtrarResultadosCotizacion(BigDecimal cotizacionClave, String nombreSeguro, String nombreCobertura) {
+        Map<String, Object> parametros = new HashMap<>();
+        parametros.put("cotizacionClave", cotizacionClave);
+        parametros.put("vNombreSeguro", nombreSeguro);
+        parametros.put("vNombreCobertura", nombreCobertura);
+
+        List<ResultadoCotizacion> resultados = resultadoCotizacionDao.filtrarResultadosCotizacion(parametros);
+
+        return resultados.stream()
+                .map(resultadoCotizacionConvertDTO::entityToDto)
+                .collect(Collectors.toList());
     }
 
 }

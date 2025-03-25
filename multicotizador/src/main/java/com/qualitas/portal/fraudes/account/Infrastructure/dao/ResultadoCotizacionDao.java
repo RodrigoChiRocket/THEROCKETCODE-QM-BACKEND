@@ -5,6 +5,7 @@ import org.apache.ibatis.annotations.Param;
 
 import java.math.BigDecimal;
 import java.util.List;
+import java.util.Map;
 
 public interface ResultadoCotizacionDao {
     ResultadoCotizacion crearResultadoCotizacion(ResultadoCotizacion resultado);
@@ -23,4 +24,6 @@ public interface ResultadoCotizacionDao {
     List<String> obtenerNombresSegurosUnicos();
 
     boolean verificarEstadoCotizacion(BigDecimal cotizacionClave); // Cambiado a boolean
+
+    List<ResultadoCotizacion> filtrarResultadosCotizacion(Map<String, Object> parametros);
 }

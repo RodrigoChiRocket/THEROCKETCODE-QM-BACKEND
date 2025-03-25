@@ -18,4 +18,6 @@ public interface ResultadoCotizacionService {
 
     List<ResultadoCotizacionDTO> buscarPorNombreSeguroYCotizacionClave(String nombreSeguro, BigDecimal cotizacionClave);
     List<String> obtenerNombresSegurosUnicos();
+
+    List<ResultadoCotizacionDTO> filtrarResultadosCotizacion(BigDecimal cotizacionClave, String nombreSeguro, String nombreCobertura);
 }
