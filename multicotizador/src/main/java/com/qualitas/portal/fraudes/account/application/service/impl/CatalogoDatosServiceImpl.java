@@ -67,7 +67,6 @@ public class CatalogoDatosServiceImpl implements CatalogoDatosService {
 
     @Override
     public CotizacionCompletaResponseDTO crearCotizacionCompletaDesdeCatalogo(CatalogoDatos catalogoDatos) {
-        try {
 
 
 
@@ -82,12 +81,16 @@ public class CatalogoDatosServiceImpl implements CatalogoDatosService {
 
             // Fecha de nacimiento (usando java.sql.Date)
             SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
-            personaDTO.setdFechaNacimiento(new java.sql.Date(sdf.parse("12-10-2003").getTime()));
+
+            personaDTO.setdFechaNacimiento(new java.sql.Date(catalogoDatos.getFechaNacimiento().getTime()));
+
+
+
 
             // Campos hardcodeados
-            personaDTO.setiCodigoPostal(1234566);
-            personaDTO.setvCorreo("pruebadeExcel" + UUID.randomUUID().toString().substring(0, 5) + "@gmail.com");
-            personaDTO.setvNumeroTelefonico("5512345678");
+            personaDTO.setiCodigoPostal(catalogoDatos.getCodigoPostal());
+            personaDTO.setvCorreo(catalogoDatos.getCorreo());
+            personaDTO.setvNumeroTelefonico(catalogoDatos.getTelefono());
 
             personaDTO = personaService.crearPersona(personaDTO);
 
@@ -177,9 +180,7 @@ public class CatalogoDatosServiceImpl implements CatalogoDatosService {
             return responseDTO;
 
 
-        } catch (ParseException e) {
-            throw new RuntimeException("Error al parsear fecha", e);
-        }
+
 
 
 
@@ -246,7 +247,10 @@ public class CatalogoDatosServiceImpl implements CatalogoDatosService {
                     }
                 }
 
-                dto.setCodigoPostal(getStringValue(row.getCell(10)));     // K
+                dto.setCodigoPostal((int) row.getCell(10).getNumericCellValue()); //k
+                dto.setCorreo(getStringValue(row.getCell(11)));
+                dto.setTelefono(getStringValue(row.getCell(12)));
+
 
                 // Solo agregar si tiene al menos un dato no nulo
                 if (hasAnyData(dto)) {

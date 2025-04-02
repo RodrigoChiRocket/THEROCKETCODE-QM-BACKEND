@@ -3,6 +3,7 @@
 package com.qualitas.portal.fraudes.account.domain.model;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import org.apache.poi.ss.usermodel.Cell;
 
 import java.util.Date;
 
@@ -20,7 +21,27 @@ public class CatalogoDatos {
             pattern = "dd/MM/yyyy"
     )
     private Date fechaNacimiento;
-    private String codigoPostal;
+    private Integer codigoPostal;
+
+    private String correo;
+
+    private String telefono;
+
+    public String getTelefono() {
+        return telefono;
+    }
+
+    public void setTelefono(String telefono) {
+        this.telefono = telefono;
+    }
+
+    public String getCorreo() {
+        return correo;
+    }
+
+    public void setCorreo(String correo) {
+        this.correo = correo;
+    }
 
     public CatalogoDatos() {
     }
@@ -34,7 +55,13 @@ public class CatalogoDatos {
     }
 
 
+    public Integer getCodigoPostal() {
+        return codigoPostal;
+    }
 
+    public void setCodigoPostal(Integer codigoPostal) {
+        this.codigoPostal = codigoPostal;
+    }
 
     public String getCategoriaVehiculo() {
         return this.categoriaVehiculo;
@@ -85,9 +112,6 @@ public class CatalogoDatos {
     }
 
 
-    public void setCodigoPostal(String codigoPostal) {
-        this.codigoPostal = codigoPostal;
-    }
 
     public String getMarca() {
         return this.marca;
