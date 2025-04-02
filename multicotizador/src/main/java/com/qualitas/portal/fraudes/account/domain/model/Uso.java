@@ -8,6 +8,15 @@ public class Uso {
     private String vNombre;         // Nombre del uso
     private Date dFechaCreacion;    // Fecha de creación
 
+    public Uso() {
+    }
+
+    public Uso(BigDecimal iUsoId, String vNombre, Date dFechaCreacion) {
+        this.iUsoId = iUsoId;
+        this.vNombre = vNombre;
+        this.dFechaCreacion = dFechaCreacion;
+    }
+
     // Getters y Setters
     public BigDecimal getiUsoId() {
         return iUsoId;

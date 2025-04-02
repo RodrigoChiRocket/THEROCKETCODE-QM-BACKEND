@@ -22,7 +22,7 @@ public class TipoAutoDaoImpl implements TipoAutoDao {
 
     @Override
     public TipoAuto obtenerTipoAuto(BigDecimal id) {
-        return sqlSession.selectOne("TipoAutoDao.obtenerTipoAuto", id);
+        return sqlSession.selectOne("com.qualitas.portal.fraudes.account.Infrastructure.dao.TipoAutoDao.obtenerTipoAuto", id);
     }
 
     @Override
@@ -40,4 +40,13 @@ public class TipoAutoDaoImpl implements TipoAutoDao {
     public void eliminarTipoAuto(BigDecimal id) {
         sqlSession.delete("TipoAutoDao.eliminarTipoAuto", id);
     }
+
+
+
+    @Override
+    public TipoAuto obtenerTipoAutoPorNombre(String vNombre) {
+        return sqlSession.selectOne("com.qualitas.portal.fraudes.account.Infrastructure.dao.TipoAutoDao.obtenerTipoAutoPorNombre", vNombre);
+    }
+
+
 }

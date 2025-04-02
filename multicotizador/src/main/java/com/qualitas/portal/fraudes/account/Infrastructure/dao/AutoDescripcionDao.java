@@ -13,4 +13,6 @@ public interface AutoDescripcionDao {
     AutoDescripcion actualizarAuto(AutoDescripcion autoDescripcion);
     List<AutoDescripcion> listarAuto();
     void eliminarAuto(BigDecimal id);
+
+    AutoDescripcion obtenerAutoDescripcionPorNombre(String vNombre);
 }

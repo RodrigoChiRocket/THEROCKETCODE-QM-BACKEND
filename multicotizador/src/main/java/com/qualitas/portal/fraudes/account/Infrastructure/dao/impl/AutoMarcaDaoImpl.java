@@ -40,4 +40,9 @@ public class AutoMarcaDaoImpl implements AutoMarcaDao {
     public void eliminarAutoMarca(BigDecimal id) {
         sqlSession.delete("AutoMarcaDao.eliminarAutoMarca", id);
     }
+
+    @Override
+    public AutoMarca obtenerAutoMarcaPorNombre(String vNombre) {
+        return sqlSession.selectOne("AutoMarcaDao.obtenerAutoMarcaPorNombre", vNombre);
+    }
 }

@@ -52,4 +52,12 @@ public class AutoMarcaServiceImpl implements AutoMarcaService {
     public void eliminarAutoMarca(BigDecimal id) {
         autoMarcaDao.eliminarAutoMarca(id);
     }
+
+    @Override
+    public AutoMarcaDTO obtenerAutoMarcaPorNombre(String nombre) {
+
+        AutoMarca autoMarca= autoMarcaDao.obtenerAutoMarcaPorNombre(nombre);
+        return  autoMarcaConvertDTO.entityToDto(autoMarca);
+
+    }
 }

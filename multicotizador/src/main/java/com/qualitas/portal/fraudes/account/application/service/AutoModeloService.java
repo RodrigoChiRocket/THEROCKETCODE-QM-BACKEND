@@ -12,4 +12,6 @@ public interface AutoModeloService {
     AutoModeloDTO actualizarAuto(BigDecimal id, AutoModeloDTO autoModeloDTO);
     List<AutoModeloDTO> listarAutos();
     void eliminarAuto(BigDecimal id);
+
+    AutoModeloDTO obtenerAutoMoeloPorNombre(String vNombre);
 }

@@ -22,7 +22,7 @@ public class CategoriaVehiculoDaoImpl implements CategoriaVehiculoDao {
 
     @Override
     public CategoriaVehiculo obtenerCategoriaVehiculo(BigDecimal id) {
-        return sqlSession.selectOne("CategoriaVehiculoDao.obtenerCategoriaVehiculo", id);
+        return sqlSession.selectOne("com.qualitas.portal.fraudes.account.Infrastructure.dao.CategoriaVehiculoDao.obtenerCategoriaVehiculo", id);
     }
 
     @Override
@@ -40,4 +40,20 @@ public class CategoriaVehiculoDaoImpl implements CategoriaVehiculoDao {
     public void eliminarCategoriaVehiculo(BigDecimal id) {
         sqlSession.delete("CategoriaVehiculoDao.eliminarCategoriaVehiculo", id);
     }
+
+    @Override
+    public CategoriaVehiculo obtenerCategoriaVehiculoPorNombre(String vNombre) {
+        return sqlSession.selectOne(
+                "com.qualitas.portal.fraudes.account.Infrastructure.dao.CategoriaVehiculoDao.obtenerCategoriaVehiculoPorNombre",
+                vNombre
+        );
+    }
+
+    /*
+    @Override
+    public CategoriaVehiculo obtenerCategoriaVehiculoPorNombre(String vNombre) {
+        return sqlSession.selectOne("com.qualitas.portal.fraudes.account.Infrastructure.dao.CategoriaVehiculoDao.obtenerCategoriaVehiculoPorNombre", vNombre);
+    }
+
+     */
 }

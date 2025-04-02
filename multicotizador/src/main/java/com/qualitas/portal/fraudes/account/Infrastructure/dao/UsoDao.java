@@ -10,4 +10,5 @@ public interface UsoDao {
     Uso actualizarUso(Uso uso);
     List<Uso> listarUsos();
     void eliminarUso(BigDecimal id);
+    Uso obtenerUsoPorNombre(String vNombre);
 }

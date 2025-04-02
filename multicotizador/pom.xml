@@ -39,6 +39,7 @@
 			<version>3.12.4</version> <!-- Utiliza la versión más reciente -->
 			<scope>test</scope>
 		</dependency>
+		<!-- Spring Framework para Java 8 -->
 
 		<!--
 		<dependency>
@@ -100,6 +101,16 @@
 			<scope>provided</scope>
 		</dependency>
 
+
+
+		<!-- Servlet API para Part -->
+		<dependency>
+			<groupId>javax.servlet</groupId>
+			<artifactId>javax.servlet-api</artifactId>
+			<version>3.1.0</version>
+			<scope>provided</scope>
+		</dependency>
+
 		<!-- Modulos de la aplicacion -->
 
 		<dependency>
@@ -133,8 +144,49 @@
 			<artifactId>qualitas-portal-util</artifactId>
 			<version>${project.parent.version}</version>
 		</dependency>
+		<!-- Reemplaza ESTA dependencia: -->
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-web</artifactId>
+			<version>6.1.4</version>
+			<scope>compile</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>commons-fileupload</groupId>
+			<artifactId>commons-fileupload</artifactId>
+			<version>1.3.3</version>
+		</dependency>
+
+
+		<!-- Por ESTA: -->
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-web</artifactId>
+			<version>5.3.29</version>
+			<scope>compile</scope>
+		</dependency>
+
+		<!-- Agrega esta dependencia para multipart: -->
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-webmvc</artifactId>
+			<version>5.3.29</version>
+		</dependency>
 
 		<!-- Dependencias para excel   -->
+		<dependency>
+			<groupId>org.apache.poi</groupId>
+			<artifactId>poi</artifactId>
+			<version>4.1.2</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.poi</groupId>
+			<artifactId>poi-ooxml</artifactId>
+			<version>4.1.2</version>
+		</dependency>
+
+		<!-- MANEJAR EXCEL -->
 		<dependency>
 			<groupId>org.apache.poi</groupId>
 			<artifactId>poi</artifactId>
@@ -251,12 +303,7 @@
 			<version>2.8.1</version>
 		</dependency>
 
-		<dependency>
-			<groupId>org.springframework</groupId>
-			<artifactId>spring-web</artifactId>
-			<version>6.1.4</version>
-			<scope>compile</scope>
-		</dependency>
+
 
 		<!-- JUnit 4 -->
 		<dependency>
@@ -283,6 +330,6 @@
 		</dependency>
 
 
-	</dependencies>
+	</dependencies><build><plugins><plugin><groupId>org.apache.maven.plugins</groupId><artifactId>maven-compiler-plugin</artifactId><configuration><source>8</source><target>8</target></configuration></plugin></plugins></build>
 
 </project>

@@ -13,4 +13,6 @@ public interface AutoModeloDao {
     AutoModelo actualizarAuto(AutoModelo auto);
     List<AutoModelo> listarAuto();
     void eliminarAuto(BigDecimal id);
+
+    AutoModelo obtenerModeloPorNombre(String vNombre);
 }

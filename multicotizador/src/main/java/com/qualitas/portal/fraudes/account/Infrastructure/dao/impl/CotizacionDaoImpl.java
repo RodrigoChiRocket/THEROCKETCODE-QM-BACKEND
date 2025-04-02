@@ -8,7 +8,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import java.math.BigDecimal;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Repository
 public class CotizacionDaoImpl implements CotizacionDao {
@@ -23,6 +25,12 @@ public class CotizacionDaoImpl implements CotizacionDao {
     @Override
     public Cotizacion crearCotizacion(Cotizacion cotizacion) {
         sqlSession.insert("com.qualitas.portal.fraudes.account.infrastructure.dao.CotizacionDao.crearCotizacion", cotizacion);
+        return cotizacion;
+    }
+    public Cotizacion crearCotizacionCatalogo(Cotizacion cotizacion) {
+        cotizacion.setbCatalogoDato(1);
+        cotizacion.setiTipoSeguroClave(new BigDecimal(1));
+        sqlSession.insert("com.qualitas.portal.fraudes.account.infrastructure.dao.CotizacionDao.crearCotizacionCatalogo", cotizacion);
         return cotizacion;
     }
 
@@ -45,5 +53,35 @@ public class CotizacionDaoImpl implements CotizacionDao {
     @Override
     public List<Cotizacion> listarTodasLasCotizaciones() {
         return sqlSession.selectList("com.qualitas.portal.fraudes.account.infrastructure.dao.CotizacionDao.listarTodasLasCotizaciones");
+    }
+
+
+
+    @Override
+    public Cotizacion actualizarCotizacionCatalogo(Cotizacion cotizacion) {
+        cotizacion.setbCatalogoDato(1); // Asegurar que mantenga el flag de catálogo
+        sqlSession.update("com.qualitas.portal.fraudes.account.infrastructure.dao.CotizacionDao.actualizarCotizacion", cotizacion);
+        return cotizacion;
+    }
+
+
+
+
+    @Override
+    public List<Cotizacion> listarCotizacionesPaginadas(int offset, int limit) {
+        Map<String, Object> params = new HashMap<>();
+        params.put("offset", offset);
+        params.put("limit", limit);
+        return sqlSession.selectList(
+                "com.qualitas.portal.fraudes.account.infrastructure.dao.CotizacionDao.listarCotizacionesPaginadas",
+                params
+        );
+    }
+
+    @Override
+    public int contarTotalCotizaciones() {
+        return sqlSession.selectOne(
+                "com.qualitas.portal.fraudes.account.infrastructure.dao.CotizacionDao.contarTotalCotizaciones"
+        );
     }
 }

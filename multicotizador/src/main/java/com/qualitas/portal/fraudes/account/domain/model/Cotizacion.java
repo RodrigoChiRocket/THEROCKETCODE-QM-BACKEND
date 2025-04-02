@@ -14,6 +14,17 @@ public class Cotizacion {
     private Date dFechaCreacion;                        // Fecha de creación
     private String iUsuarioCreacion;                    // Usuario de creación
 
+    private Integer bCatalogoDato;
+
+
+    public Integer getbCatalogoDato() {
+        return bCatalogoDato;
+    }
+
+    public void setbCatalogoDato(Integer bCatalogoDato) {
+        this.bCatalogoDato = bCatalogoDato;
+    }
+
     public BigDecimal getiCotizacionId() {
         return iCotizacionId;
     }

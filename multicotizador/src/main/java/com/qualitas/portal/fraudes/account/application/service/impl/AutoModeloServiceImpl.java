@@ -71,4 +71,10 @@ public class AutoModeloServiceImpl implements AutoModeloService {
         }
         autoModeloDao.eliminarAuto(id);
     }
+
+    @Override
+    public AutoModeloDTO obtenerAutoMoeloPorNombre(String vNombre) {
+        AutoModelo autoModelo= autoModeloDao.obtenerModeloPorNombre(vNombre);
+        return autoModeloConvertDTO.entityToDto(autoModelo);
+    }
 }

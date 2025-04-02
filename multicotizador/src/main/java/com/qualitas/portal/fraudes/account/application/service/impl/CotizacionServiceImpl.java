@@ -32,6 +32,13 @@ public class CotizacionServiceImpl implements CotizacionService {
     @Autowired
     private TipoSeguroService tipoSeguroService;
 
+    @Autowired
+    private AutoModeloService autoModeloService;
+    @Autowired
+    private AutoDescripcionService autoDescripcionService;
+    @Autowired
+    private AutoMarcaService autoMarcaService;
+
 
     @Autowired
     private CotizacionDao cotizacionDao;
@@ -53,6 +60,53 @@ public class CotizacionServiceImpl implements CotizacionService {
 
     // Convertir de Model a DTO
 
+    @Override
+    public CotizacionCompletaResponseDTO crearCotizacionCompletaCatalogo(CotizacionCompletaDTO cotizacionCompletaDTO) {
+        // Obtener los nombres de las entidades relacionadas
+        UsoDTO usoDTO = usoService.obtenerUso(cotizacionCompletaDTO.getCotizacion().getiUsoClave());
+        CategoriaVehiculoDTO categoriaVehiculoDTO = categoriaVehiculoService.obtenerCategoriaVehiculo(cotizacionCompletaDTO.getCotizacion().getiCategoriaVehiculoClave());
+        TipoSeguroDTO tipoSeguroDTO = tipoSeguroService.obtenerTipoSeguro(cotizacionCompletaDTO.getCotizacion().getiTipoSeguroClave());
+        TipoAutoDTO tipoAutoDTO = tipoAutoService.obtenerTipoAuto(cotizacionCompletaDTO.getCotizacion().getiTipoAutoClave());
+
+
+        // 1. Crear la Persona
+        PersonaDTO personaDTO = cotizacionCompletaDTO.getPersona();
+        PersonaDTO personaCreada = personaService.crearPersona(personaDTO);
+        BigDecimal personaId = personaCreada.getiPersonaId();
+
+        // 2. Crear el Auto
+        AutoDTO autoDTO = cotizacionCompletaDTO.getAuto();
+        AutoDTO autoCreado = autoService.crearAuto(autoDTO);
+        BigDecimal autoId = autoCreado.getiAutoId();
+
+        // 3. Crear la Cotización con los IDs de Persona y Auto
+        CotizacionDTO cotizacionDTO = cotizacionCompletaDTO.getCotizacion();
+        cotizacionDTO.setiPersonaClave(personaId);
+        cotizacionDTO.setiAutoClave(autoId);
+        cotizacionDTO.setvNombreUso(usoDTO.getvNombre());
+        cotizacionDTO.setvNombreCategoriaVehiculo(categoriaVehiculoDTO.getvNombre());
+        cotizacionDTO.setvNombreTipoSeguro(tipoSeguroDTO.getvNombre());
+        cotizacionDTO.setvNombreTipoAUto(tipoAutoDTO.getvNombre());
+
+        // 4. Crear la Cotización
+        Cotizacion cotizacion = convertToModel(cotizacionDTO);
+        cotizacionDao.crearCotizacionCatalogo(cotizacion);
+        CotizacionDTO cotizacionCreada = convertToDTO(cotizacion);
+
+        // Asignar los nombres al CotizacionDTO creado
+        cotizacionCreada.setvNombreUso(usoDTO.getvNombre());
+        cotizacionCreada.setvNombreCategoriaVehiculo(categoriaVehiculoDTO.getvNombre());
+        cotizacionCreada.setvNombreTipoSeguro(tipoSeguroDTO.getvNombre());
+        cotizacionCreada.setvNombreTipoAUto(tipoAutoDTO.getvNombre());
+
+        // 5. Crear y devolver el DTO de respuesta
+        CotizacionCompletaResponseDTO responseDTO = new CotizacionCompletaResponseDTO();
+        responseDTO.setPersona(personaCreada);
+        responseDTO.setAuto(autoCreado);
+        responseDTO.setCotizacion(cotizacionCreada);
+
+        return responseDTO;
+    }
 
 
     @Override
@@ -125,6 +179,13 @@ public class CotizacionServiceImpl implements CotizacionService {
     }
 
     @Override
+    public CotizacionDTO crearCotizacionCatalogo(CotizacionDTO cotizacionDTO) {
+        Cotizacion cotizacion = convertToModel(cotizacionDTO);
+        cotizacionDao.crearCotizacionCatalogo(cotizacion);
+        return convertToDTO(cotizacion);
+    }
+
+    @Override
     public CotizacionDTO obtenerCotizacionPorId(BigDecimal id) {
         Cotizacion cotizacion = cotizacionDao.obtenerCotizacionPorId(id);
         return convertToDTO(cotizacion);
@@ -148,5 +209,74 @@ public class CotizacionServiceImpl implements CotizacionService {
         return cotizaciones.stream()
                 .map(this::convertToDTO)
                 .collect(Collectors.toList());
+    }
+
+
+
+
+
+
+
+
+
+
+
+    @Override
+    public List<CotizacionCompletaResponseDTO> listarCotizacionesCompletasPaginadas(int offset, int limit) {
+        List<Cotizacion> cotizaciones = cotizacionDao.listarCotizacionesPaginadas(offset, limit);
+
+        return cotizaciones.stream().map(cotizacion -> {
+            // 1. Obtener datos de persona
+            PersonaDTO persona = personaService.obtenerPersona(cotizacion.getiPersonaClave());
+
+            // 2. Obtener datos del auto
+            AutoDTO auto = autoService.obtenerAuto(cotizacion.getiAutoClave());
+
+            // 3. Obtener y asignar nombres completos del auto
+            if (auto.getiAutoMarcaClave() != null) {
+                AutoMarcaDTO marca = autoMarcaService.obtenerAutoMarca(auto.getiAutoMarcaClave());
+                auto.setvNombreMarca(marca != null ? marca.getvNombre() : "");
+            }
+
+            if (auto.getiAutoModeloClave() != null) {
+                AutoModeloDTO modelo = autoModeloService.obtenerAuto(auto.getiAutoModeloClave());
+                auto.setvNombreModelo(modelo != null ? modelo.getvNombre() : "");
+            }
+
+            if (auto.getiAutoDescripcionClave() != null) {
+                AutoDescripcionDTO descripcion = autoDescripcionService.obtenerAuto(auto.getiAutoDescripcionClave());
+                auto.setvNombreDescripcion(descripcion != null ? descripcion.getvNombre() : "");
+            }
+
+            // 4. Convertir cotización a DTO con nombres de relaciones
+            CotizacionDTO cotizacionDTO = convertToDTO(cotizacion);
+
+            // Obtener y asignar nombres de las entidades relacionadas
+            UsoDTO usoDTO = usoService.obtenerUso(cotizacion.getiUsoClave());
+            CategoriaVehiculoDTO categoriaVehiculoDTO = categoriaVehiculoService
+                    .obtenerCategoriaVehiculo(cotizacion.getiCategoriaVehiculoClave());
+            TipoSeguroDTO tipoSeguroDTO = tipoSeguroService
+                    .obtenerTipoSeguro(cotizacion.getiTipoSeguroClave());
+            TipoAutoDTO tipoAutoDTO = tipoAutoService
+                    .obtenerTipoAuto(cotizacion.getiTipoAutoClave());
+
+            cotizacionDTO.setvNombreUso(usoDTO.getvNombre());
+            cotizacionDTO.setvNombreCategoriaVehiculo(categoriaVehiculoDTO.getvNombre());
+            cotizacionDTO.setvNombreTipoSeguro(tipoSeguroDTO.getvNombre());
+            cotizacionDTO.setvNombreTipoAUto(tipoAutoDTO.getvNombre());
+
+            // 5. Crear y retornar respuesta completa
+            CotizacionCompletaResponseDTO responseDTO = new CotizacionCompletaResponseDTO();
+            responseDTO.setPersona(persona);
+            responseDTO.setAuto(auto);
+            responseDTO.setCotizacion(cotizacionDTO);
+
+            return responseDTO;
+        }).collect(Collectors.toList());
+    }
+
+    @Override
+    public int contarTotalCotizaciones() {
+        return cotizacionDao.contarTotalCotizaciones();
     }
 }

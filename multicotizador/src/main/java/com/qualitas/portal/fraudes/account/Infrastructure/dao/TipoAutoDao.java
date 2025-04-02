@@ -10,4 +10,6 @@ public interface TipoAutoDao {
     TipoAuto actualizarTipoAuto(TipoAuto tipoAuto);
     List<TipoAuto> listarTiposAuto();
     void eliminarTipoAuto(BigDecimal id);
+
+    TipoAuto obtenerTipoAutoPorNombre(String vNombre);
 }

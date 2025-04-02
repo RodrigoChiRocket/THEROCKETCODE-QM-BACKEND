@@ -71,4 +71,9 @@ public class AutoDescripcionServiceImpl implements AutoDescripcionService {
         }
         autoDescripcionDao.eliminarAuto(id);
     }
+
+    @Override
+    public AutoDescripcionDTO obtenerAutoPorNombre(String vNombre) {
+        return null;
+    }
 }

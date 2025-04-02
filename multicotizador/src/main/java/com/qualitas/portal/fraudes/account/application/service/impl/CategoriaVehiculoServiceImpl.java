@@ -52,4 +52,9 @@ public class CategoriaVehiculoServiceImpl implements CategoriaVehiculoService {
     public void eliminarCategoriaVehiculo(BigDecimal id) {
         categoriaVehiculoDao.eliminarCategoriaVehiculo(id);
     }
+
+    @Override
+    public CategoriaVehiculo obtenerCategoriaVehiculoPorNombre(String vNombre) {
+        return categoriaVehiculoDao.obtenerCategoriaVehiculoPorNombre(vNombre);
+    }
 }

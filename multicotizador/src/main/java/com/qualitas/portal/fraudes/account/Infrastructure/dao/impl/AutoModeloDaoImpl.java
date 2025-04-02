@@ -45,4 +45,9 @@ public class AutoModeloDaoImpl implements AutoModeloDao {
     public void eliminarAuto(BigDecimal id) {
         sqlSession.delete("com.qualitas.portal.fraudes.account.Infrastructure.dao.AutoModeloDao.eliminarAutoModelo", id);
     }
+
+    @Override
+    public AutoModelo obtenerModeloPorNombre(String vNombre) {
+        return sqlSession.selectOne("com.qualitas.portal.fraudes.account.Infrastructure.dao.AutoModeloDao.obtenerAutoModeloPorNombre", vNombre);
+    }
 }

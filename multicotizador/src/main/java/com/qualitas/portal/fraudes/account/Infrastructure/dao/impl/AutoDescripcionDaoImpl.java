@@ -46,4 +46,9 @@ public class AutoDescripcionDaoImpl implements AutoDescripcionDao {
     public void eliminarAuto(BigDecimal id) {
         sqlSession.delete("com.qualitas.portal.fraudes.account.Infrastructure.dao.AutoDescripcionDao.eliminarAutoDescripcion", id);
     }
+
+    @Override
+    public AutoDescripcion obtenerAutoDescripcionPorNombre(String vNombre) {
+        return sqlSession.selectOne("com.qualitas.portal.fraudes.account.Infrastructure.dao.AutoDescripcionDao.obtenerAutoDescripcionPorNombre", vNombre);
+    }
 }

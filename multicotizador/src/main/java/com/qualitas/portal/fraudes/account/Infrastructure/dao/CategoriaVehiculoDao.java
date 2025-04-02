@@ -10,4 +10,6 @@ public interface CategoriaVehiculoDao {
     CategoriaVehiculo actualizarCategoriaVehiculo(CategoriaVehiculo categoriaVehiculo);
     List<CategoriaVehiculo> listarCategoriasVehiculo();
     void eliminarCategoriaVehiculo(BigDecimal id);
+
+    CategoriaVehiculo obtenerCategoriaVehiculoPorNombre(String vNombre);
 }

@@ -40,4 +40,9 @@ public class UsoDaoImpl implements UsoDao {
     public void eliminarUso(BigDecimal id) {
         sqlSession.delete("UsoDao.eliminarUso", id);
     }
+
+    @Override
+    public Uso obtenerUsoPorNombre(String vNombre) {
+        return sqlSession.selectOne("UsoDao.obtenerUsoPorNombre", vNombre);
+    }
 }

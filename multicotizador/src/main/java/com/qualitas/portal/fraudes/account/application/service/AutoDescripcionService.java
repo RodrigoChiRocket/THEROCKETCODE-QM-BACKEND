@@ -12,4 +12,7 @@ public interface AutoDescripcionService {
     AutoDescripcionDTO actualizarAuto(BigDecimal id, AutoDescripcionDTO autoDescripcionDTO);
     List<AutoDescripcionDTO> listarAutos();
     void eliminarAuto(BigDecimal id);
+
+
+    AutoDescripcionDTO obtenerAutoPorNombre(String vNombre);
 }

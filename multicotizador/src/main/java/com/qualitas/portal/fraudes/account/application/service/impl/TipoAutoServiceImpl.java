@@ -52,4 +52,9 @@ public class TipoAutoServiceImpl implements TipoAutoService {
     public void eliminarTipoAuto(BigDecimal id) {
         tipoAutoDao.eliminarTipoAuto(id);
     }
+
+    @Override
+    public TipoAuto obtenerTipoAutoPorNombre(String vNombre) {
+        return tipoAutoDao.obtenerTipoAutoPorNombre(vNombre);
+    }
 }

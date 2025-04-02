@@ -3,6 +3,7 @@ C:\Users\rodri\Downloads\ROCKET-Q\Qualitas-Fraudes-Back\multicotizador\src\main\
 C:\Users\rodri\Downloads\ROCKET-Q\Qualitas-Fraudes-Back\multicotizador\src\main\java\com\qualitas\portal\fraudes\account\Infrastructure\dao\CategoriaVehiculoDao.java
 C:\Users\rodri\Downloads\ROCKET-Q\Qualitas-Fraudes-Back\multicotizador\src\main\java\com\qualitas\portal\fraudes\account\util\jwt\JWTPayload.java
 C:\Users\rodri\Downloads\ROCKET-Q\Qualitas-Fraudes-Back\multicotizador\src\main\java\com\qualitas\portal\fraudes\account\util\validacionContrasena\VCaracteres.java
+C:\Users\rodri\Downloads\ROCKET-Q\Qualitas-Fraudes-Back\multicotizador\src\main\java\com\qualitas\portal\fraudes\account\domain\model\CatalogoDatos.java
 C:\Users\rodri\Downloads\ROCKET-Q\Qualitas-Fraudes-Back\multicotizador\src\main\java\com\qualitas\portal\fraudes\account\application\dto\UsoDTO.java
 C:\Users\rodri\Downloads\ROCKET-Q\Qualitas-Fraudes-Back\multicotizador\src\main\java\com\qualitas\portal\fraudes\account\domain\model\Uso.java
 C:\Users\rodri\Downloads\ROCKET-Q\Qualitas-Fraudes-Back\multicotizador\src\main\java\com\qualitas\portal\fraudes\account\application\convertDTO\impl\TipoAutoConvertDTOImpl.java
@@ -14,7 +15,9 @@ C:\Users\rodri\Downloads\ROCKET-Q\Qualitas-Fraudes-Back\multicotizador\src\main\
 C:\Users\rodri\Downloads\ROCKET-Q\Qualitas-Fraudes-Back\multicotizador\src\main\java\com\qualitas\portal\fraudes\account\Infrastructure\dao\impl\AutoMarcaDaoImpl.java
 C:\Users\rodri\Downloads\ROCKET-Q\Qualitas-Fraudes-Back\multicotizador\src\main\java\com\qualitas\portal\fraudes\account\application\convertDTO\AutoConvertDTO.java
 C:\Users\rodri\Downloads\ROCKET-Q\Qualitas-Fraudes-Back\multicotizador\src\main\java\com\qualitas\portal\fraudes\account\application\dto\AutoMarcaDTO.java
+C:\Users\rodri\Downloads\ROCKET-Q\Qualitas-Fraudes-Back\multicotizador\src\main\java\com\qualitas\portal\fraudes\account\application\service\ExcelImportService.java
 C:\Users\rodri\Downloads\ROCKET-Q\Qualitas-Fraudes-Back\multicotizador\src\main\java\com\qualitas\portal\fraudes\account\application\service\impl\CodigoEmailServiceImpl.java
+C:\Users\rodri\Downloads\ROCKET-Q\Qualitas-Fraudes-Back\multicotizador\src\main\java\com\qualitas\portal\fraudes\account\domain\model\Vehiculo.java
 C:\Users\rodri\Downloads\ROCKET-Q\Qualitas-Fraudes-Back\multicotizador\src\main\java\com\qualitas\portal\fraudes\account\application\convertDTO\impl\CategoriaVehiculoConvertDTOImpl.java
 C:\Users\rodri\Downloads\ROCKET-Q\Qualitas-Fraudes-Back\multicotizador\src\main\java\com\qualitas\portal\fraudes\account\application\dto\response\UsuarioRespuesta.java
 C:\Users\rodri\Downloads\ROCKET-Q\Qualitas-Fraudes-Back\multicotizador\src\main\java\com\qualitas\portal\fraudes\account\application\service\AutoService.java
@@ -29,6 +32,7 @@ C:\Users\rodri\Downloads\ROCKET-Q\Qualitas-Fraudes-Back\multicotizador\src\main\
 C:\Users\rodri\Downloads\ROCKET-Q\Qualitas-Fraudes-Back\multicotizador\src\main\java\com\qualitas\portal\fraudes\account\Infrastructure\dao\UsuarioDao.java
 C:\Users\rodri\Downloads\ROCKET-Q\Qualitas-Fraudes-Back\multicotizador\src\main\java\com\qualitas\portal\fraudes\account\application\dto\ResultadoCotizacionDTO.java
 C:\Users\rodri\Downloads\ROCKET-Q\Qualitas-Fraudes-Back\multicotizador\src\main\java\com\qualitas\portal\fraudes\account\application\dto\TipoSeguroDTO.java
+C:\Users\rodri\Downloads\ROCKET-Q\Qualitas-Fraudes-Back\multicotizador\src\main\java\com\qualitas\portal\fraudes\account\application\service\impl\CatalogoDatosServiceImpl.java
 C:\Users\rodri\Downloads\ROCKET-Q\Qualitas-Fraudes-Back\multicotizador\src\main\java\com\qualitas\portal\fraudes\account\application\service\ResultadoConsultaService.java
 C:\Users\rodri\Downloads\ROCKET-Q\Qualitas-Fraudes-Back\multicotizador\src\main\java\com\qualitas\portal\fraudes\account\application\dto\AutoDescripcionDTO.java
 C:\Users\rodri\Downloads\ROCKET-Q\Qualitas-Fraudes-Back\multicotizador\src\main\java\com\qualitas\portal\fraudes\account\domain\model\Permiso.java
@@ -60,6 +64,7 @@ C:\Users\rodri\Downloads\ROCKET-Q\Qualitas-Fraudes-Back\multicotizador\src\main\
 C:\Users\rodri\Downloads\ROCKET-Q\Qualitas-Fraudes-Back\multicotizador\src\main\java\com\qualitas\portal\fraudes\account\application\dto\CotizacionDTO.java
 C:\Users\rodri\Downloads\ROCKET-Q\Qualitas-Fraudes-Back\multicotizador\src\main\java\com\qualitas\portal\fraudes\account\Infrastructure\dao\impl\TipoSeguroDaoImpl.java
 C:\Users\rodri\Downloads\ROCKET-Q\Qualitas-Fraudes-Back\multicotizador\src\main\java\com\qualitas\portal\fraudes\account\Infrastructure\dao\TipoAutoDao.java
+C:\Users\rodri\Downloads\ROCKET-Q\Qualitas-Fraudes-Back\multicotizador\src\main\java\com\qualitas\portal\fraudes\account\application\service\CatalogoDatosService.java
 C:\Users\rodri\Downloads\ROCKET-Q\Qualitas-Fraudes-Back\multicotizador\src\main\java\com\qualitas\portal\fraudes\account\application\convertDTO\AutoMarcaConvertDTO.java
 C:\Users\rodri\Downloads\ROCKET-Q\Qualitas-Fraudes-Back\multicotizador\src\main\java\com\qualitas\portal\fraudes\account\domain\model\Auto.java
 C:\Users\rodri\Downloads\ROCKET-Q\Qualitas-Fraudes-Back\multicotizador\src\main\java\com\qualitas\portal\fraudes\account\application\service\TipoSeguroService.java
@@ -79,6 +84,7 @@ C:\Users\rodri\Downloads\ROCKET-Q\Qualitas-Fraudes-Back\multicotizador\src\main\
 C:\Users\rodri\Downloads\ROCKET-Q\Qualitas-Fraudes-Back\multicotizador\src\main\java\com\qualitas\portal\fraudes\account\Infrastructure\dao\impl\CategoriaVehiculoDaoImpl.java
 C:\Users\rodri\Downloads\ROCKET-Q\Qualitas-Fraudes-Back\multicotizador\src\main\java\com\qualitas\portal\fraudes\account\application\service\impl\AutoServiceImpl.java
 C:\Users\rodri\Downloads\ROCKET-Q\Qualitas-Fraudes-Back\multicotizador\src\main\java\com\qualitas\portal\fraudes\account\util\email\EnvioCorreo.java
+C:\Users\rodri\Downloads\ROCKET-Q\Qualitas-Fraudes-Back\multicotizador\src\main\java\com\qualitas\portal\fraudes\account\application\dto\response\PageDTO.java
 C:\Users\rodri\Downloads\ROCKET-Q\Qualitas-Fraudes-Back\multicotizador\src\main\java\com\qualitas\portal\fraudes\account\application\service\CheckService.java
 C:\Users\rodri\Downloads\ROCKET-Q\Qualitas-Fraudes-Back\multicotizador\src\main\java\com\qualitas\portal\fraudes\account\application\service\RolService.java
 C:\Users\rodri\Downloads\ROCKET-Q\Qualitas-Fraudes-Back\multicotizador\src\main\java\com\qualitas\portal\fraudes\account\Infrastructure\dao\impl\RolDaoImpl.java
@@ -90,6 +96,7 @@ C:\Users\rodri\Downloads\ROCKET-Q\Qualitas-Fraudes-Back\multicotizador\src\main\
 C:\Users\rodri\Downloads\ROCKET-Q\Qualitas-Fraudes-Back\multicotizador\src\main\java\com\qualitas\portal\fraudes\account\Infrastructure\dao\ResultadoCotizacionDao.java
 C:\Users\rodri\Downloads\ROCKET-Q\Qualitas-Fraudes-Back\multicotizador\src\main\java\com\qualitas\portal\fraudes\account\application\service\AutoMarcaService.java
 C:\Users\rodri\Downloads\ROCKET-Q\Qualitas-Fraudes-Back\multicotizador\src\main\java\com\qualitas\portal\fraudes\account\application\service\TipoAutoService.java
+C:\Users\rodri\Downloads\ROCKET-Q\Qualitas-Fraudes-Back\multicotizador\src\main\java\com\qualitas\portal\fraudes\account\application\service\ExcelReaderService.java
 C:\Users\rodri\Downloads\ROCKET-Q\Qualitas-Fraudes-Back\multicotizador\src\main\java\com\qualitas\portal\fraudes\account\application\service\RestablecerContrasenaService.java
 C:\Users\rodri\Downloads\ROCKET-Q\Qualitas-Fraudes-Back\multicotizador\src\main\java\com\qualitas\portal\fraudes\account\domain\model\Cotizacion.java
 C:\Users\rodri\Downloads\ROCKET-Q\Qualitas-Fraudes-Back\multicotizador\src\main\java\com\qualitas\portal\fraudes\account\application\service\impl\TipoSeguroServiceImpl.java

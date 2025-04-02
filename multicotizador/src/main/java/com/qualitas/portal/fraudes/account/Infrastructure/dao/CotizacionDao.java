@@ -7,8 +7,15 @@ import java.util.List;
 
 public interface CotizacionDao {
     Cotizacion crearCotizacion(Cotizacion cotizacion);
+    Cotizacion crearCotizacionCatalogo(Cotizacion cotizacion);
     Cotizacion obtenerCotizacionPorId(BigDecimal id);
     Cotizacion actualizarCotizacion(Cotizacion cotizacion);
     void eliminarCotizacion(BigDecimal id);
     List<Cotizacion> listarTodasLasCotizaciones();
+
+    Cotizacion actualizarCotizacionCatalogo(Cotizacion cotizacion);
+
+    //PAGINADO:
+    List<Cotizacion> listarCotizacionesPaginadas(int pagina, int tamanioPagina);
+    int contarTotalCotizaciones();
 }

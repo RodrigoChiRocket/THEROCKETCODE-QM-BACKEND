@@ -10,4 +10,6 @@ public interface AutoMarcaDao {
     AutoMarca actualizarAutoMarca(AutoMarca autoMarca);
     List<AutoMarca> listarAutoMarcas();
     void eliminarAutoMarca(BigDecimal id);
+
+    AutoMarca obtenerAutoMarcaPorNombre(String vNombre);
 }
