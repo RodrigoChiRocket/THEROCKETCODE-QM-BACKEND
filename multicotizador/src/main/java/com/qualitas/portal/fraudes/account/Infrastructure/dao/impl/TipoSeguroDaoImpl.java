@@ -16,28 +16,34 @@ public class TipoSeguroDaoImpl implements TipoSeguroDao {
 
     @Override
     public TipoSeguro crearTipoSeguro(TipoSeguro tipoSeguro) {
-        sqlSession.insert("TipoSeguroDao.crearTipoSeguro", tipoSeguro);
+        sqlSession.insert("com.qualitas.portal.fraudes.account.Infrastructure.dao.TipoSeguroDao.crearTipoSeguro", tipoSeguro);
         return tipoSeguro;
     }
 
     @Override
     public TipoSeguro obtenerTipoSeguro(BigDecimal id) {
-        return sqlSession.selectOne("TipoSeguroDao.obtenerTipoSeguro", id);
+        return sqlSession.selectOne("com.qualitas.portal.fraudes.account.Infrastructure.dao.TipoSeguroDao.obtenerTipoSeguro", id);
     }
 
     @Override
     public TipoSeguro actualizarTipoSeguro(TipoSeguro tipoSeguro) {
-        sqlSession.update("TipoSeguroDao.actualizarTipoSeguro", tipoSeguro);
+        sqlSession.update("com.qualitas.portal.fraudes.account.Infrastructure.dao.TipoSeguroDao.actualizarTipoSeguro", tipoSeguro);
         return tipoSeguro;
     }
 
     @Override
     public List<TipoSeguro> listarTiposSeguro() {
-        return sqlSession.selectList("TipoSeguroDao.listarTiposSeguro");
+        return sqlSession.selectList("com.qualitas.portal.fraudes.account.Infrastructure.dao.TipoSeguroDao.listarTiposSeguro");
     }
 
     @Override
     public void eliminarTipoSeguro(BigDecimal id) {
-        sqlSession.delete("TipoSeguroDao.eliminarTipoSeguro", id);
+        sqlSession.delete("com.qualitas.portal.fraudes.account.Infrastructure.dao.TipoSeguroDao.eliminarTipoSeguro", id);
     }
+
+    @Override
+    public TipoSeguro obtenerTipoSeguroPorNombre(String vNombre) {
+        return sqlSession.selectOne("com.qualitas.portal.fraudes.account.Infrastructure.dao.obtenerTipoSeguroPorNombre", vNombre);
+    }
+
 }

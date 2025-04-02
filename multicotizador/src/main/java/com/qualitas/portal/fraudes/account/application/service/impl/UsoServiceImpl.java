@@ -52,4 +52,9 @@ public class UsoServiceImpl implements UsoService {
     public void eliminarUso(BigDecimal id) {
         usoDao.eliminarUso(id);
     }
+
+    @Override
+    public Uso obtenerUsoPorNombre(String vNombre) {
+        return usoDao.obtenerUsoPorNombre(vNombre);
+    }
 }

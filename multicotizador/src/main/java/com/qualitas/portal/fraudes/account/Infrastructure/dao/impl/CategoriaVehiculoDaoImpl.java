@@ -16,7 +16,7 @@ public class CategoriaVehiculoDaoImpl implements CategoriaVehiculoDao {
 
     @Override
     public CategoriaVehiculo crearCategoriaVehiculo(CategoriaVehiculo categoriaVehiculo) {
-        sqlSession.insert("CategoriaVehiculoDao.crearCategoriaVehiculo", categoriaVehiculo);
+        sqlSession.insert("com.qualitas.portal.fraudes.account.Infrastructure.dao.CategoriaVehiculoDao.crearCategoriaVehiculo", categoriaVehiculo);
         return categoriaVehiculo;
     }
 
@@ -27,18 +27,18 @@ public class CategoriaVehiculoDaoImpl implements CategoriaVehiculoDao {
 
     @Override
     public CategoriaVehiculo actualizarCategoriaVehiculo(CategoriaVehiculo categoriaVehiculo) {
-        sqlSession.update("CategoriaVehiculoDao.actualizarCategoriaVehiculo", categoriaVehiculo);
+        sqlSession.update("com.qualitas.portal.fraudes.account.Infrastructure.dao.CategoriaVehiculoDao.actualizarCategoriaVehiculo", categoriaVehiculo);
         return categoriaVehiculo;
     }
 
     @Override
     public List<CategoriaVehiculo> listarCategoriasVehiculo() {
-        return sqlSession.selectList("CategoriaVehiculoDao.listarCategoriasVehiculo");
+        return sqlSession.selectList("com.qualitas.portal.fraudes.account.Infrastructure.dao.CategoriaVehiculoDao.listarCategoriasVehiculo");
     }
 
     @Override
     public void eliminarCategoriaVehiculo(BigDecimal id) {
-        sqlSession.delete("CategoriaVehiculoDao.eliminarCategoriaVehiculo", id);
+        sqlSession.delete("com.qualitas.portal.fraudes.account.Infrastructure.dao.CategoriaVehiculoDao.eliminarCategoriaVehiculo", id);
     }
 
     @Override

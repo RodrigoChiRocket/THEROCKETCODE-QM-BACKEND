@@ -10,4 +10,7 @@ public interface TipoSeguroDao {
     TipoSeguro actualizarTipoSeguro(TipoSeguro tipoSeguro);
     List<TipoSeguro> listarTiposSeguro();
     void eliminarTipoSeguro(BigDecimal id);
+
+
+    TipoSeguro obtenerTipoSeguroPorNombre(String vNombre);
 }

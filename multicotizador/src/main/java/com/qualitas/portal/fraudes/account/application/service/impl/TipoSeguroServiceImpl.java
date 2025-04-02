@@ -52,4 +52,9 @@ public class TipoSeguroServiceImpl implements TipoSeguroService {
     public void eliminarTipoSeguro(BigDecimal id) {
         tipoSeguroDao.eliminarTipoSeguro(id);
     }
+
+    @Override
+    public TipoSeguro obtenerTipoSeguroPorNombre(String vNombre) {
+        return tipoSeguroDao.obtenerTipoSeguroPorNombre(vNombre);
+    }
 }

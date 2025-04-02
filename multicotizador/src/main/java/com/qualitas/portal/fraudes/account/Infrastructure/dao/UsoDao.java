@@ -11,4 +11,6 @@ public interface UsoDao {
     List<Uso> listarUsos();
     void eliminarUso(BigDecimal id);
     Uso obtenerUsoPorNombre(String vNombre);
+
+
 }

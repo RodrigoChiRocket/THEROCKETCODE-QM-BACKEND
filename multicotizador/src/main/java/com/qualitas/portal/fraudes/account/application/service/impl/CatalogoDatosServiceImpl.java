@@ -6,10 +6,7 @@ import com.qualitas.portal.fraudes.account.application.dto.CotizacionDTO;
 import com.qualitas.portal.fraudes.account.application.dto.PersonaDTO;
 import com.qualitas.portal.fraudes.account.application.dto.request.CotizacionCompletaDTO;
 import com.qualitas.portal.fraudes.account.application.dto.response.CotizacionCompletaResponseDTO;
-import com.qualitas.portal.fraudes.account.application.service.AutoService;
-import com.qualitas.portal.fraudes.account.application.service.CatalogoDatosService;
-import com.qualitas.portal.fraudes.account.application.service.CotizacionService;
-import com.qualitas.portal.fraudes.account.application.service.PersonaService;
+import com.qualitas.portal.fraudes.account.application.service.*;
 import com.qualitas.portal.fraudes.account.domain.enums.Sexo;
 import com.qualitas.portal.fraudes.account.domain.model.*;
 import org.apache.poi.ss.usermodel.*;
@@ -44,6 +41,8 @@ public class CatalogoDatosServiceImpl implements CatalogoDatosService {
 
     @Autowired
     private PersonaService personaService;
+    @Autowired
+    private UsoService usoService;
 
     @Autowired
     private AutoDescripcionDao autoDescripcionDao;
@@ -134,7 +133,7 @@ public class CatalogoDatosServiceImpl implements CatalogoDatosService {
 
 
 
-            Uso uso = new Uso();
+
 
             /*
             uso= usoDao.obtenerUsoPorNombre(catalogoDatos.getUso());
@@ -151,22 +150,23 @@ public class CatalogoDatosServiceImpl implements CatalogoDatosService {
 
             CategoriaVehiculo categoriaVehiculo = categoriaVehiculoDao.obtenerCategoriaVehiculoPorNombre(catalogoDatos.getCategoriaVehiculo());
             TipoAuto tipoAuto = tipoAutoDao.obtenerTipoAutoPorNombre(catalogoDatos.getTipoVehiculo());
+            Uso uso = usoService.obtenerUsoPorNombre(catalogoDatos.getUso());
 
             cotizacionDTO.setiTipoAutoClave(tipoAuto.getlTipoAutoId());
             cotizacionDTO.setiCategoriaVehiculoClave(categoriaVehiculo.getlCategoriaVehiculoId());
-            cotizacionDTO.setiUsoClave(new BigDecimal(1));
+            cotizacionDTO.setiUsoClave(uso.getiUsoId());
             cotizacionDTO.setiAutoClave(auto.getiAutoId());
             cotizacionDTO.setiPersonaClave(personaDTO.getiPersonaId());
             cotizacionDTO.setdFechaCreacion(new java.sql.Date(System.currentTimeMillis()));
-            cotizacionDTO.setiTipoSeguroClave(new BigDecimal(2));
-            cotizacionDTO.setiUsuarioCreacion("Prueba");
+            cotizacionDTO.setiTipoSeguroClave(new BigDecimal(1));
+            cotizacionDTO.setiUsuarioCreacion("Developer");
 
             cotizacionDTO = cotizacionService.crearCotizacionCatalogo(cotizacionDTO);
 
             cotizacionDTO.setvNombreCategoriaVehiculo(categoriaVehiculo.getvNombre());
             cotizacionDTO.setvNombreTipoAUto(tipoAuto.getvNombre());
-            cotizacionDTO.setvNombreTipoSeguro("Prube");
-            cotizacionDTO.setvNombreUso("Prueba");
+            cotizacionDTO.setvNombreTipoSeguro("Seguro Anual");
+            cotizacionDTO.setvNombreUso(uso.getvNombre());
 
             CotizacionCompletaResponseDTO responseDTO = new CotizacionCompletaResponseDTO();
 

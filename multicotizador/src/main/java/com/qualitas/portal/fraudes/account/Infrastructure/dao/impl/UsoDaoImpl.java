@@ -16,33 +16,33 @@ public class UsoDaoImpl implements UsoDao {
 
     @Override
     public Uso crearUso(Uso uso) {
-        sqlSession.insert("UsoDao.crearUso", uso);
+        sqlSession.insert("com.qualitas.portal.fraudes.account.Infrastructure.dao.UsoDao.crearUso", uso);
         return uso;
     }
 
     @Override
     public Uso obtenerUso(BigDecimal id) {
-        return sqlSession.selectOne("UsoDao.obtenerUso", id);
+        return sqlSession.selectOne("com.qualitas.portal.fraudes.account.Infrastructure.dao.UsoDao.obtenerUso", id);
     }
 
     @Override
     public Uso actualizarUso(Uso uso) {
-        sqlSession.update("UsoDao.actualizarUso", uso);
+        sqlSession.update("com.qualitas.portal.fraudes.account.Infrastructure.dao.UsoDao.actualizarUso", uso);
         return uso;
     }
 
     @Override
     public List<Uso> listarUsos() {
-        return sqlSession.selectList("UsoDao.listarUsos");
+        return sqlSession.selectList("com.qualitas.portal.fraudes.account.Infrastructure.dao.UsoDao.listarUsos");
     }
 
     @Override
     public void eliminarUso(BigDecimal id) {
-        sqlSession.delete("UsoDao.eliminarUso", id);
+        sqlSession.delete("com.qualitas.portal.fraudes.account.Infrastructure.dao.UsoDao.eliminarUso", id);
     }
 
     @Override
     public Uso obtenerUsoPorNombre(String vNombre) {
-        return sqlSession.selectOne("UsoDao.obtenerUsoPorNombre", vNombre);
+        return sqlSession.selectOne("com.qualitas.portal.fraudes.account.Infrastructure.dao.UsoDao.obtenerUsoPorNombre", vNombre);
     }
 }
