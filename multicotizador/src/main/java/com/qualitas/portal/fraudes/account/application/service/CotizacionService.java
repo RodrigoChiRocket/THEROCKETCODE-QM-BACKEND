@@ -7,6 +7,7 @@ import com.qualitas.portal.fraudes.account.domain.model.Cotizacion;
 
 import java.math.BigDecimal;
 import java.util.List;
+import java.util.Set;
 
 public interface CotizacionService {
     CotizacionCompletaResponseDTO crearCotizacionCompleta(CotizacionCompletaDTO cotizacionCompletaDTO);
@@ -15,10 +16,16 @@ public interface CotizacionService {
     CotizacionDTO crearCotizacion(CotizacionDTO cotizacionDTO);
     CotizacionDTO crearCotizacionCatalogo(CotizacionDTO cotizacionDTO);
     CotizacionDTO obtenerCotizacionPorId(BigDecimal id);
-    CotizacionDTO actualizarCotizacion(CotizacionDTO cotizacionDTO);
+
+    CotizacionDTO actualizarCotizacion(BigDecimal id, CotizacionDTO cotizacionDTO);
+
+
+    CotizacionCompletaResponseDTO actualizarCotizacionCompleta(BigDecimal cotizacionId, CotizacionCompletaDTO requestDTO);
+
     void eliminarCotizacion(BigDecimal id);
     List<CotizacionDTO> listarTodasLasCotizaciones();
 
+    void eliminarListaCotizacion(Set<BigDecimal> cotizacionesId);
 
 
 

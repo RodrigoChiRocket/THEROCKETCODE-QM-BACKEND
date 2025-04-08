@@ -46,6 +46,14 @@ public class CotizacionDaoImpl implements CotizacionDao {
     }
 
     @Override
+    public Cotizacion actualizarCotizacionCatalogo(Cotizacion cotizacion) {
+        // Asegurar que mantenga el flag de catálogo
+        cotizacion.setbCatalogoDato(1);
+        sqlSession.update("com.qualitas.portal.fraudes.account.infrastructure.dao.CotizacionDao.actualizarCotizacion", cotizacion);
+        return cotizacion;
+    }
+
+    @Override
     public void eliminarCotizacion(BigDecimal id) {
         sqlSession.delete("com.qualitas.portal.fraudes.account.infrastructure.dao.CotizacionDao.eliminarCotizacion", id);
     }
@@ -57,12 +65,6 @@ public class CotizacionDaoImpl implements CotizacionDao {
 
 
 
-    @Override
-    public Cotizacion actualizarCotizacionCatalogo(Cotizacion cotizacion) {
-        cotizacion.setbCatalogoDato(1); // Asegurar que mantenga el flag de catálogo
-        sqlSession.update("com.qualitas.portal.fraudes.account.infrastructure.dao.CotizacionDao.actualizarCotizacion", cotizacion);
-        return cotizacion;
-    }
 
 
 

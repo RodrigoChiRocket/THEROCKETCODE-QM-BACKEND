@@ -11,6 +11,7 @@ com\qualitas\portal\fraudes\account\application\convertDTO\impl\ResultadoCotizac
 com\qualitas\portal\fraudes\account\application\service\impl\RutinaCargaServiceImpl.class
 com\qualitas\portal\fraudes\account\Infrastructure\dao\impl\AutoDaoImpl.class
 com\qualitas\portal\fraudes\account\application\service\impl\TipoAutoServiceImpl.class
+com\qualitas\portal\fraudes\account\application\service\AutoCotizacionService.class
 com\qualitas\portal\fraudes\account\application\service\RutinaCargaService.class
 com\qualitas\portal\fraudes\account\application\convertDTO\impl\TipoAutoConvertDTOImpl.class
 com\qualitas\portal\fraudes\account\Infrastructure\dao\TipoSeguroDao.class
@@ -31,15 +32,18 @@ com\qualitas\portal\fraudes\account\application\convertDTO\impl\PersonaConvertDT
 com\qualitas\portal\fraudes\account\application\service\TipoAutoService.class
 com\qualitas\portal\fraudes\account\domain\model\TipoSeguro.class
 com\qualitas\portal\fraudes\account\Infrastructure\dao\impl\UsuarioDaoImpl.class
+com\qualitas\portal\fraudes\account\application\service\impl\ExcelProcessorServiceImpl$1.class
 com\qualitas\portal\fraudes\account\Infrastructure\dao\impl\ResultadoConsultaDaoImpl.class
 com\qualitas\portal\fraudes\account\application\service\impl\AutenticacionServiceImpl.class
 com\qualitas\portal\fraudes\account\application\service\impl\AutoDescripcionServiceImpl.class
 com\qualitas\portal\fraudes\account\domain\model\AutoModelo.class
 com\qualitas\portal\fraudes\account\Infrastructure\dao\impl\AutoModeloDaoImpl.class
 com\qualitas\portal\fraudes\account\Infrastructure\dao\impl\PersonaDaoImpl.class
+com\qualitas\portal\fraudes\account\application\service\impl\ExcelProcessorServiceImpl.class
 com\qualitas\portal\fraudes\account\util\jwt\JwtUtil.class
 com\qualitas\portal\fraudes\account\util\validacionContrasena\VContrasena.class
 com\qualitas\portal\fraudes\account\domain\model\Auto.class
+com\qualitas\portal\fraudes\account\application\service\impl\PersonaCotizacionServiceImpl.class
 com\qualitas\portal\fraudes\account\Infrastructure\dao\ResultadoCotizacionDao.class
 com\qualitas\portal\fraudes\account\application\service\RestablecerContrasenaService.class
 com\qualitas\portal\fraudes\account\application\dto\PersonaDTO.class
@@ -66,6 +70,7 @@ com\qualitas\portal\fraudes\account\Infrastructure\dao\TipoAutoDao.class
 com\qualitas\portal\fraudes\account\application\convertDTO\impl\UsoConvertDTOImpl.class
 com\qualitas\portal\fraudes\account\application\service\impl\CatalogoDatosServiceImpl.class
 com\qualitas\portal\fraudes\account\application\convertDTO\impl\CategoriaVehiculoConvertDTOImpl.class
+com\qualitas\portal\fraudes\account\application\service\CotizacionCompletaService.class
 com\qualitas\portal\fraudes\account\application\convertDTO\AutoConvertDTO.class
 com\qualitas\portal\fraudes\account\domain\model\AutoMarca.class
 com\qualitas\portal\fraudes\account\application\dto\AutoDescripcionDTO.class
@@ -77,8 +82,10 @@ com\qualitas\portal\fraudes\account\application\convertDTO\PersonaConvertDTO.cla
 com\qualitas\portal\fraudes\account\application\convertDTO\ResultadoCotizacionConvertDTO.class
 com\qualitas\portal\fraudes\account\application\dto\response\InicioSesionRespuestaDto.class
 com\qualitas\portal\fraudes\account\application\service\PersonaService.class
+com\qualitas\portal\fraudes\account\application\service\impl\AutoCotizacionServiceImpl.class
 com\qualitas\portal\fraudes\account\application\service\ExcelImportService$1.class
 com\qualitas\portal\fraudes\account\application\service\impl\CategoriaVehiculoServiceImpl.class
+com\qualitas\portal\fraudes\account\application\dto\EliminarCotizacionesRequest.class
 com\qualitas\portal\fraudes\account\application\service\impl\CorreoServiceImpl$2.class
 com\qualitas\portal\fraudes\account\Infrastructure\dao\RutinaCargaDao.class
 com\qualitas\portal\fraudes\account\application\convertDTO\ResultadoConsultaConvertDTO.class
@@ -121,8 +128,10 @@ com\qualitas\portal\fraudes\account\application\service\impl\AutoServiceImpl.cla
 com\qualitas\portal\fraudes\account\Infrastructure\dao\impl\ResultadoCotizacionDaoImpl.class
 com\qualitas\portal\fraudes\account\application\service\ExcelImportService$3.class
 com\qualitas\portal\fraudes\account\application\service\impl\AutoMarcaServiceImpl.class
+com\qualitas\portal\fraudes\account\application\service\CatalogoDatosService2.class
 com\qualitas\portal\fraudes\account\application\service\ResultadoCotizacionService.class
 com\qualitas\portal\fraudes\account\application\service\AutenticacionService.class
+com\qualitas\portal\fraudes\account\application\service\ExcelProcessorService.class
 com\qualitas\portal\fraudes\account\application\service\impl\CodigoEmailServiceImpl.class
 com\qualitas\portal\fraudes\account\application\service\RolService.class
 com\qualitas\portal\fraudes\account\application\convertDTO\impl\AutoConvertDTOImpl.class
@@ -136,6 +145,7 @@ com\qualitas\portal\fraudes\account\domain\model\RutinaCarga.class
 com\qualitas\portal\fraudes\account\application\convertDTO\UsoConvertDTO.class
 com\qualitas\portal\fraudes\account\util\exception\XSSFilterException.class
 com\qualitas\portal\fraudes\account\application\service\impl\RolServiceImpl.class
+com\qualitas\portal\fraudes\account\application\service\PersonaCotizacionService.class
 com\qualitas\portal\fraudes\account\application\service\CategoriaVehiculoService.class
 com\qualitas\portal\fraudes\account\application\service\impl\RestablecerContrasenaServiceImpl.class
 com\qualitas\portal\fraudes\account\application\dto\CotizacionDTO.class
@@ -146,6 +156,7 @@ com\qualitas\portal\fraudes\account\domain\model\AutoDescripcion.class
 com\qualitas\portal\fraudes\account\application\convertDTO\AutoModeloConvertDTO.class
 com\qualitas\portal\fraudes\account\domain\model\CatalogoDatos.class
 com\qualitas\portal\fraudes\account\application\service\CorreoService.class
+com\qualitas\portal\fraudes\account\application\service\impl\CotizacionCompletaServiceImpl.class
 com\qualitas\portal\fraudes\account\application\service\ExcelImportService$2.class
 com\qualitas\portal\fraudes\account\util\jwt\JWTPayload.class
 com\qualitas\portal\fraudes\account\application\service\impl\TipoSeguroServiceImpl.class
@@ -157,4 +168,5 @@ com\qualitas\portal\fraudes\account\application\convertDTO\impl\RutinaCargaConve
 com\qualitas\portal\fraudes\account\application\dto\response\RolRespuestaDto.class
 com\qualitas\portal\fraudes\account\application\service\UsuarioService.class
 com\qualitas\portal\fraudes\account\domain\model\Vehiculo.class
+com\qualitas\portal\fraudes\account\application\service\impl\CatalogoDatosService2Impl.class
 com\qualitas\portal\fraudes\account\domain\model\Permiso.class

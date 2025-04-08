@@ -17,6 +17,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.math.BigDecimal;
+import java.sql.Date;
+import java.time.LocalDate;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -75,16 +77,63 @@ public class AutoServiceImpl implements AutoService {
 
     @Override
     public AutoDTO actualizarAuto(BigDecimal id, AutoDTO autoDTO) {
-        Auto autoExistente = autoDAO.obtenerAuto(id);
-        if (autoExistente == null) {
-            throw new RuntimeException("Auto no encontrado con ID: " + id);
-        }
-        Auto autoActualizado = autoConvertDTO.dtoToEntity(autoDTO);
-        autoActualizado.setiAutoId(id);
-        autoDAO.actualizarAuto(autoActualizado);
-        return autoConvertDTO.entityToDto(autoActualizado);
-    }
+        try {
+            logger.info("Actualizando auto con ID: {}", id);
 
+            Auto autoExistente = autoDAO.obtenerAuto(id);
+            if (autoExistente == null) {
+                throw new RuntimeException("Auto no encontrado con ID: " + id);
+            }
+
+            // Convertir DTO a entidad
+            Auto autoActualizado = autoConvertDTO.dtoToEntity(autoDTO);
+            autoActualizado.setiAutoId(id);
+
+            // Mantener valores existentes si no se proporcionan en el DTO
+            if (autoActualizado.getdAno() == null) {
+                autoActualizado.setdAno(autoExistente.getdAno());
+            }
+
+            if (autoActualizado.getdFechaCreacion() == null) {
+                autoActualizado.setdFechaCreacion(autoExistente.getdFechaCreacion());
+            }
+
+            if (autoActualizado.getiUsuarioCreacion() == null) {
+                autoActualizado.setiUsuarioCreacion(autoExistente.getiUsuarioCreacion());
+            }
+
+            if (autoActualizado.getiAutoMarcaClave() == null) {
+                autoActualizado.setiAutoMarcaClave(autoExistente.getiAutoMarcaClave());
+            }
+
+            if (autoActualizado.getiAutoModeloClave() == null) {
+                autoActualizado.setiAutoModeloClave(autoExistente.getiAutoModeloClave());
+            }
+
+            if (autoActualizado.getiAutoDescripcionClave() == null) {
+                autoActualizado.setiAutoDescripcionClave(autoExistente.getiAutoDescripcionClave());
+            }
+
+            // Actualizar en base de datos
+            autoDAO.actualizarAuto(autoActualizado);
+
+            // Obtener datos adicionales para la respuesta
+            AutoMarca autoMarca = autoMarcaDao.obtenerAutoMarca(autoActualizado.getiAutoMarcaClave());
+            AutoModelo autoModelo = autoModeloDao.obtenerAuto(autoActualizado.getiAutoModeloClave());
+            AutoDescripcion autoDescripcion = autoDescripcionDao.obtenerAuto(autoActualizado.getiAutoDescripcionClave());
+
+            AutoDTO responseDTO = autoConvertDTO.entityToDto(autoActualizado);
+            responseDTO.setvNombreMarca(autoMarca != null ? autoMarca.getvNombre() : null);
+            responseDTO.setvNombreModelo(autoModelo != null ? autoModelo.getvNombre() : null);
+            responseDTO.setvNombreDescripcion(autoDescripcion != null ? autoDescripcion.getvNombre() : null);
+
+            return responseDTO;
+
+        } catch (Exception e) {
+            logger.error("Error al actualizar auto con ID: " + id, e);
+            throw new RuntimeException("Error al actualizar el auto: " + e.getMessage());
+        }
+    }
     @Override
     public List<AutoDTO> listarAutos() {
         return autoDAO.listarAuto()

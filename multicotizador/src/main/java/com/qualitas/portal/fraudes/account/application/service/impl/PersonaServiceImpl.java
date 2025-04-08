@@ -42,19 +42,56 @@ public class PersonaServiceImpl implements PersonaService {
         }
         return personaConvertDTO.entityToDto(persona);
     }
-
     @Override
     public PersonaDTO actualizarPersona(BigDecimal id, PersonaDTO personaDTO) {
-        Persona personaExistente = personaDAO.obtenerPersona(id);
-        if (personaExistente == null) {
-            throw new RuntimeException("Persona no encontrada con ID: " + id);
-        }
-        Persona personaActualizada = personaConvertDTO.dtoToEntity(personaDTO);
-        personaActualizada.setiPersonaId(id);
-        personaDAO.actualizarPersona(personaActualizada);
-        return personaConvertDTO.entityToDto(personaActualizada);
-    }
+        try {
+            logger.info("Actualizando persona con ID: {}", id);
 
+            // 1. Verificar existencia
+            Persona personaExistente = personaDAO.obtenerPersona(id);
+            if (personaExistente == null) {
+                throw new RuntimeException("Persona no encontrada con ID: " + id);
+            }
+
+            // 2. Convertir DTO a entidad
+            Persona personaActualizada = personaConvertDTO.dtoToEntity(personaDTO);
+            personaActualizada.setiPersonaId(id);
+
+            // 3. Mantener todos los valores existentes si no se proporcionan en el DTO
+            if (personaActualizada.getvNombre() == null) {
+                personaActualizada.setvNombre(personaExistente.getvNombre());
+            }
+
+            if (personaActualizada.getvSexo() == null) {
+                personaActualizada.setvSexo(personaExistente.getvSexo());
+            }
+
+            if (personaActualizada.getiCodigoPostal() == null) {
+                personaActualizada.setiCodigoPostal(personaExistente.getiCodigoPostal());
+            }
+
+            if (personaActualizada.getdFechaNacimiento() == null) {
+                personaActualizada.setdFechaNacimiento(personaExistente.getdFechaNacimiento());
+            }
+
+            if (personaActualizada.getvCorreo() == null) {
+                personaActualizada.setvCorreo(personaExistente.getvCorreo());
+            }
+
+            if (personaActualizada.getvNumeroTelefonico() == null) {
+                personaActualizada.setvNumeroTelefonico(personaExistente.getvNumeroTelefonico());
+            }
+
+            // 4. Actualizar en BD
+            personaDAO.actualizarPersona(personaActualizada);
+
+            return personaConvertDTO.entityToDto(personaActualizada);
+
+        } catch (Exception e) {
+            logger.error("Error al actualizar persona con ID: " + id, e);
+            throw new RuntimeException("Error al actualizar persona: " + e.getMessage());
+        }
+    }
     @Override
     public List<PersonaDTO> listarPersonas() {
         return personaDAO.listarPersonas()

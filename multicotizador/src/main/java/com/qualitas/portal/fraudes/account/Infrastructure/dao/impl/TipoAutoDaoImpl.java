@@ -33,7 +33,7 @@ public class TipoAutoDaoImpl implements TipoAutoDao {
 
     @Override
     public List<TipoAuto> listarTiposAuto() {
-        return sqlSession.selectList("TipoAutoDao.listarTiposAuto");
+        return sqlSession.selectList("com.qualitas.portal.fraudes.account.Infrastructure.dao.git TipoAutoDao.listarTiposAuto");
     }
 
     @Override
