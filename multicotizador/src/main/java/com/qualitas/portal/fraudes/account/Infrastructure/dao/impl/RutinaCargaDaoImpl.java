@@ -7,7 +7,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import java.math.BigDecimal;
+import java.time.LocalDateTime;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Repository
 public class RutinaCargaDaoImpl implements RutinaCargaDao {
@@ -44,5 +47,34 @@ public class RutinaCargaDaoImpl implements RutinaCargaDao {
     @Override
     public void eliminarRutina(BigDecimal id) {
         sqlSession.delete("com.qualitas.portal.fraudes.account.Infrastructure.dao.RutinaCargaDao.eliminarRutinaCarga", id);
+    }
+
+    @Override
+    public void actualizarDatosObtenidos(BigDecimal id, Integer nuevosDatos) {
+        Map<String, Object> parametros = new HashMap<>();
+        parametros.put("id", id);
+        parametros.put("iDatosObtenidos", nuevosDatos);
+
+        sqlSession.update("com.qualitas.portal.fraudes.account.Infrastructure.dao.RutinaCargaDao.actualizarDatosObtenidos", parametros);
+
+
+
+    }
+
+    @Override
+    public void actualizarProgramacion(BigDecimal id, LocalDateTime nuevaProgramacion) {
+        Map<String, Object> parametros = new HashMap<>();
+        parametros.put("id", id);
+        parametros.put("dProgramacion", nuevaProgramacion);
+
+        sqlSession.update("com.qualitas.portal.fraudes.account.Infrastructure.dao.RutinaCargaDao.actualizarProgramacion", parametros);
+    }
+    @Override
+    public void actualizarHabilitado(BigDecimal id, Integer habilitado) {
+        Map<String, Object> parametros = new HashMap<>();
+        parametros.put("id", id);
+        parametros.put("bHabilitado", habilitado);
+
+        sqlSession.update("com.qualitas.portal.fraudes.account.Infrastructure.dao.RutinaCargaDao.actualizarHabilitado", parametros);
     }
 }

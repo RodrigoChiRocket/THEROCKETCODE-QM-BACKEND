@@ -91,4 +91,12 @@ public class ResultadoCotizacionDaoImpl implements ResultadoCotizacionDao {
                 parametros
         );
     }
+
+    @Override
+    public int contarRegistrosPorRutina(BigDecimal rutinaClave) {
+        return sqlSession.selectOne(
+                "com.qualitas.portal.fraudes.account.infrastructure.dao.ResultadoCotizacionDao.contarRegistrosPorRutina",
+                rutinaClave
+        );
+    }
 }

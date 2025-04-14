@@ -11,42 +11,40 @@ import java.util.List;
 @Repository
 public class TipoAutoDaoImpl implements TipoAutoDao {
 
+    private static final String NAMESPACE = "com.qualitas.portal.fraudes.account.Infrastructure.dao.TipoAutoDao.";
+
     @Autowired
     private SqlSession sqlSession;
 
     @Override
     public TipoAuto crearTipoAuto(TipoAuto tipoAuto) {
-        sqlSession.insert("TipoAutoDao.crearTipoAuto", tipoAuto);
+        sqlSession.insert(NAMESPACE + "crearTipoAuto", tipoAuto);
         return tipoAuto;
     }
 
     @Override
     public TipoAuto obtenerTipoAuto(BigDecimal id) {
-        return sqlSession.selectOne("com.qualitas.portal.fraudes.account.Infrastructure.dao.TipoAutoDao.obtenerTipoAuto", id);
+        return sqlSession.selectOne(NAMESPACE + "obtenerTipoAuto", id);
     }
 
     @Override
     public TipoAuto actualizarTipoAuto(TipoAuto tipoAuto) {
-        sqlSession.update("TipoAutoDao.actualizarTipoAuto", tipoAuto);
+        sqlSession.update(NAMESPACE + "actualizarTipoAuto", tipoAuto);
         return tipoAuto;
     }
 
     @Override
     public List<TipoAuto> listarTiposAuto() {
-        return sqlSession.selectList("com.qualitas.portal.fraudes.account.Infrastructure.dao.git TipoAutoDao.listarTiposAuto");
+        return sqlSession.selectList(NAMESPACE + "listarTiposAuto");
     }
 
     @Override
     public void eliminarTipoAuto(BigDecimal id) {
-        sqlSession.delete("TipoAutoDao.eliminarTipoAuto", id);
+        sqlSession.delete(NAMESPACE + "eliminarTipoAuto", id);
     }
-
-
 
     @Override
     public TipoAuto obtenerTipoAutoPorNombre(String vNombre) {
-        return sqlSession.selectOne("com.qualitas.portal.fraudes.account.Infrastructure.dao.TipoAutoDao.obtenerTipoAutoPorNombre", vNombre);
+        return sqlSession.selectOne(NAMESPACE + "obtenerTipoAutoPorNombre", vNombre);
     }
-
-
 }

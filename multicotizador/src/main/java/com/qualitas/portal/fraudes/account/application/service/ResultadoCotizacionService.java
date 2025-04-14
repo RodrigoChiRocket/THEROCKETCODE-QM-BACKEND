@@ -20,4 +20,6 @@ public interface ResultadoCotizacionService {
     List<String> obtenerNombresSegurosUnicos();
 
     List<ResultadoCotizacionDTO> filtrarResultadosCotizacion(BigDecimal cotizacionClave, String nombreSeguro, String nombreCobertura);
+
+    int contarRegistrosPorRutina(BigDecimal rutinaClave);
 }

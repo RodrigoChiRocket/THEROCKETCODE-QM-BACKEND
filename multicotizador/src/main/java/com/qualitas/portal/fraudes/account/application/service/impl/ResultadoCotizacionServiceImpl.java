@@ -26,9 +26,25 @@ public class ResultadoCotizacionServiceImpl implements ResultadoCotizacionServic
     @Override
     public ResultadoCotizacionDTO crearResultadoCotizacion(ResultadoCotizacionDTO dto) {
         ResultadoCotizacion resultado = resultadoCotizacionConvertDTO.dtoToEntity(dto);
+
+        String nombreSeguro = dto.getvNombreSeguro();
+
+        if ("Chubb".equals(nombreSeguro)) {
+            resultado.setiRutinaCargaClave(new BigDecimal(1));
+        } else if ("Mapfre".equals(nombreSeguro)) {
+            resultado.setiRutinaCargaClave(new BigDecimal(2));
+        } else if ("GNP".equals(nombreSeguro)) {
+            resultado.setiRutinaCargaClave(new BigDecimal(3));
+        } else if ("AXA".equals(nombreSeguro)) {
+            resultado.setiRutinaCargaClave(new BigDecimal(4));
+        } else if ("HDI".equals(nombreSeguro)) {
+            resultado.setiRutinaCargaClave(new BigDecimal(5));
+        }
+
         resultadoCotizacionDao.crearResultadoCotizacion(resultado);
         return resultadoCotizacionConvertDTO.entityToDto(resultado);
     }
+
 
     @Override
     public ResultadoCotizacionDTO obtenerResultadoCotizacion(BigDecimal id) {
@@ -104,4 +120,9 @@ public class ResultadoCotizacionServiceImpl implements ResultadoCotizacionServic
                 .collect(Collectors.toList());
     }
 
+
+    @Override
+    public int contarRegistrosPorRutina(BigDecimal rutinaClave) {
+        return resultadoCotizacionDao.contarRegistrosPorRutina(rutinaClave);
+    }
 }

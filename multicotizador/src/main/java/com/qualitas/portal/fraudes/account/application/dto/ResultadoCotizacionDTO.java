@@ -27,6 +27,17 @@ public class ResultadoCotizacionDTO {
     private int iDanoVehiculo;
     private Date dFechaCreacion;
 
+    private BigDecimal iRutinaCargaClave;
+
+
+    public BigDecimal getiRutinaCargaClave() {
+        return iRutinaCargaClave;
+    }
+
+    public void setiRutinaCargaClave(BigDecimal iRutinaCargaClave) {
+        this.iRutinaCargaClave = iRutinaCargaClave;
+    }
+
     // Getters y Setters
     public BigDecimal getiResultadoCotizacionId() {
         return iResultadoCotizacionId;

@@ -1,29 +1,26 @@
 package com.qualitas.portal.fraudes.account.domain.model;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import java.math.BigDecimal;
+import java.time.LocalDateTime;
 import java.util.Date;
 
 public class RutinaCarga {
     private BigDecimal iRutinaCargaId;
     private String vPortal;
-    private Date dFechaActual;
-    private String vNRODatos;
-    private String vProgramacion;
+
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    private LocalDateTime dFechaActualizacion;
+    private Integer iDatosObtenidos;
+    private LocalDateTime dProgramacion;
     private String vEstatus;
-    private String vHabilitado;
+    private Integer bHabilitado;
 
     public RutinaCarga() {
     }
 
-    public RutinaCarga(BigDecimal iRutinaCargaId, String vPortal, Date dFechaActual, String vNRODatos, String vProgramacion, String vEstatus, String vHabilitado) {
-        this.iRutinaCargaId = iRutinaCargaId;
-        this.vPortal = vPortal;
-        this.dFechaActual = dFechaActual;
-        this.vNRODatos = vNRODatos;
-        this.vProgramacion = vProgramacion;
-        this.vEstatus = vEstatus;
-        this.vHabilitado = vHabilitado;
-    }
+
 
     public BigDecimal getiRutinaCargaId() {
         return iRutinaCargaId;
@@ -41,28 +38,28 @@ public class RutinaCarga {
         this.vPortal = vPortal;
     }
 
-    public Date getdFechaActual() {
-        return dFechaActual;
+    public LocalDateTime getdFechaActualizacion() {
+        return dFechaActualizacion;
     }
 
-    public void setdFechaActual(Date dFechaActual) {
-        this.dFechaActual = dFechaActual;
+    public void setdFechaActualizacion(LocalDateTime dFechaActualizacion) {
+        this.dFechaActualizacion = dFechaActualizacion;
     }
 
-    public String getvNRODatos() {
-        return vNRODatos;
+    public Integer getiDatosObtenidos() {
+        return iDatosObtenidos;
     }
 
-    public void setvNRODatos(String vNRODatos) {
-        this.vNRODatos = vNRODatos;
+    public void setiDatosObtenidos(Integer iDatosObtenidos) {
+        this.iDatosObtenidos = iDatosObtenidos;
     }
 
-    public String getvProgramacion() {
-        return vProgramacion;
+    public LocalDateTime getdProgramacion() {
+        return dProgramacion;
     }
 
-    public void setvProgramacion(String vProgramacion) {
-        this.vProgramacion = vProgramacion;
+    public void setdProgramacion(LocalDateTime dProgramacion) {
+        this.dProgramacion = dProgramacion;
     }
 
     public String getvEstatus() {
@@ -73,11 +70,11 @@ public class RutinaCarga {
         this.vEstatus = vEstatus;
     }
 
-    public String getvHabilitado() {
-        return vHabilitado;
+    public Integer getbHabilitado() {
+        return bHabilitado;
     }
 
-    public void setvHabilitado(String vHabilitado) {
-        this.vHabilitado = vHabilitado;
+    public void setbHabilitado(Integer bHabilitado) {
+        this.bHabilitado = bHabilitado;
     }
 }

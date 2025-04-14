@@ -16,11 +16,11 @@ public class RutinaCargaConvertDTOImpl implements RutinaCargaConvertDTO {
         return new RutinaCargaDTO(
                 rutinaCarga.getiRutinaCargaId(),
                 rutinaCarga.getvPortal(),
-                rutinaCarga.getdFechaActual(),
-                rutinaCarga.getvNRODatos(),
-                rutinaCarga.getvProgramacion(),
+                rutinaCarga.getdFechaActualizacion(),
+                rutinaCarga.getiDatosObtenidos(),
+                rutinaCarga.getdProgramacion(),
                 rutinaCarga.getvEstatus(),
-                rutinaCarga.getvHabilitado()
+                rutinaCarga.getbHabilitado()
         );
     }
 
@@ -29,14 +29,15 @@ public class RutinaCargaConvertDTOImpl implements RutinaCargaConvertDTO {
         if (rutinaCargaDTO == null) {
             return null;
         }
-        return new RutinaCarga(
-                rutinaCargaDTO.getiRutinaCargaId(),
-                rutinaCargaDTO.getvPortal(),
-                rutinaCargaDTO.getdFechaActual(),
-                rutinaCargaDTO.getvNRODatos(),
-                rutinaCargaDTO.getvProgramacion(),
-                rutinaCargaDTO.getvEstatus(),
-                rutinaCargaDTO.getvHabilitado()
-        );
+        RutinaCarga rutinaCarga = new RutinaCarga();
+        rutinaCarga.setiRutinaCargaId(rutinaCargaDTO.getiRutinaCargaId());
+        rutinaCarga.setvPortal(rutinaCargaDTO.getvPortal());
+        rutinaCarga.setdFechaActualizacion(rutinaCargaDTO.getdFechaActualizacion());
+        rutinaCarga.setiDatosObtenidos(rutinaCargaDTO.getiDatosObtenidos());
+        rutinaCarga.setdProgramacion(rutinaCargaDTO.getdProgramacion());
+        rutinaCarga.setvEstatus(rutinaCargaDTO.getvEstatus());
+        rutinaCarga.setbHabilitado(rutinaCargaDTO.getbHabilitado());
+
+        return rutinaCarga;
     }
 }

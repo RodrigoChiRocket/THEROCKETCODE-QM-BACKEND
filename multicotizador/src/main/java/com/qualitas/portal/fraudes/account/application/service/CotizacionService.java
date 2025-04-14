@@ -23,7 +23,7 @@ public interface CotizacionService {
     CotizacionCompletaResponseDTO actualizarCotizacionCompleta(BigDecimal cotizacionId, CotizacionCompletaDTO requestDTO);
 
     void eliminarCotizacion(BigDecimal id);
-    List<CotizacionDTO> listarTodasLasCotizaciones();
+    List<CotizacionCompletaResponseDTO> listarTodasLasCotizaciones();
 
     void eliminarListaCotizacion(Set<BigDecimal> cotizacionesId);
 

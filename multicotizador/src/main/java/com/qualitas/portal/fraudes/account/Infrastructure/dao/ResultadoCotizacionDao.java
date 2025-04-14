@@ -26,4 +26,6 @@ public interface ResultadoCotizacionDao {
     boolean verificarEstadoCotizacion(BigDecimal cotizacionClave); // Cambiado a boolean
 
     List<ResultadoCotizacion> filtrarResultadosCotizacion(Map<String, Object> parametros);
+
+    int contarRegistrosPorRutina(BigDecimal rutinaClave);
 }
