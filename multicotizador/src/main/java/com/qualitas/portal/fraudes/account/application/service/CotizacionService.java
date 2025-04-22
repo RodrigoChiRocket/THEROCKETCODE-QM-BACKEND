@@ -34,5 +34,9 @@ public interface CotizacionService {
 
  List<CotizacionCompletaResponseDTO> listarCotizacionesCompletasPaginadas(int offset, int limit);
 
+
+    List<CotizacionCompletaResponseDTO> listarCotizacionesCompletas();
+
+
     int contarTotalCotizaciones();
 }

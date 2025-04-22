@@ -6,6 +6,8 @@ import java.util.List;
 
 public interface ResultadoConsultaService {
     ResultadoConsultaDTO crearResultadoConsulta(ResultadoConsultaDTO resultadoConsultaDTO);
+
+    ResultadoConsultaDTO crearResultadoConsultaCatalogo(ResultadoConsultaDTO resultadoConsultaDTO);
     ResultadoConsultaDTO obtenerResultadoConsulta(BigDecimal id);
     ResultadoConsultaDTO actualizarResultadoConsulta(BigDecimal id, ResultadoConsultaDTO resultadoConsultaDTO);
     List<ResultadoConsultaDTO> listarResultadosConsulta();

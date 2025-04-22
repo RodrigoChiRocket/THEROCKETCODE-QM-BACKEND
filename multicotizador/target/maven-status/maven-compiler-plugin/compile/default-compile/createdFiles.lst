@@ -57,6 +57,7 @@ com\qualitas\portal\fraudes\account\application\convertDTO\TipoSeguroConvertDTO.
 com\qualitas\portal\fraudes\account\application\dto\request\CotizacionRequest.class
 com\qualitas\portal\fraudes\account\application\dto\request\PersonaRequestDTO.class
 com\qualitas\portal\fraudes\account\Infrastructure\dao\AutoDescripcionDao.class
+com\qualitas\portal\fraudes\account\application\dto\response\EstadisticasCoberturaDTO.class
 com\qualitas\portal\fraudes\account\util\validacionContrasena\VCaracteres.class
 com\qualitas\portal\fraudes\account\domain\model\ResultadoConsulta.class
 com\qualitas\portal\fraudes\account\Infrastructure\dao\CotizacionDao.class
@@ -98,6 +99,7 @@ com\qualitas\portal\fraudes\account\domain\model\Rol.class
 com\qualitas\portal\fraudes\account\application\convertDTO\impl\AutoMarcaConvertDTOImpl.class
 com\qualitas\portal\fraudes\account\application\service\ExcelImportService$4.class
 com\qualitas\portal\fraudes\account\application\service\impl\CatalogoDatosServiceImpl$1.class
+com\qualitas\portal\fraudes\account\application\service\DashBoardService.class
 com\qualitas\portal\fraudes\account\application\convertDTO\impl\ResultadoConsultaConvertDTOImpl.class
 com\qualitas\portal\fraudes\account\application\convertDTO\AutoMarcaConvertDTO.class
 com\qualitas\portal\fraudes\account\application\service\impl\CorreoServiceImpl.class
@@ -140,6 +142,7 @@ com\qualitas\portal\fraudes\account\Infrastructure\dao\CategoriaVehiculoDao.clas
 com\qualitas\portal\fraudes\account\application\dto\ResultadoConsultaDTO.class
 com\qualitas\portal\fraudes\account\application\dto\TipoSeguroDTO.class
 com\qualitas\portal\fraudes\account\application\service\ResultadoConsultaService.class
+com\qualitas\portal\fraudes\account\application\dto\ResultadosDashboardDTO.class
 com\qualitas\portal\fraudes\account\application\convertDTO\AutoDescripcionConvertDTO.class
 com\qualitas\portal\fraudes\account\domain\model\RutinaCarga.class
 com\qualitas\portal\fraudes\account\application\convertDTO\UsoConvertDTO.class
@@ -147,6 +150,7 @@ com\qualitas\portal\fraudes\account\util\exception\XSSFilterException.class
 com\qualitas\portal\fraudes\account\application\service\impl\RolServiceImpl.class
 com\qualitas\portal\fraudes\account\application\service\PersonaCotizacionService.class
 com\qualitas\portal\fraudes\account\application\service\CategoriaVehiculoService.class
+com\qualitas\portal\fraudes\account\application\dto\response\EstadisticasTiempoEjecucionDTO.class
 com\qualitas\portal\fraudes\account\application\service\impl\RestablecerContrasenaServiceImpl.class
 com\qualitas\portal\fraudes\account\application\dto\CotizacionDTO.class
 com\qualitas\portal\fraudes\account\Infrastructure\dao\UsoDao.class
@@ -166,6 +170,7 @@ com\qualitas\portal\fraudes\account\Infrastructure\dao\PersonaDao.class
 com\qualitas\portal\fraudes\account\util\email\EnvioCorreo$2.class
 com\qualitas\portal\fraudes\account\application\convertDTO\impl\RutinaCargaConvertDTOImpl.class
 com\qualitas\portal\fraudes\account\application\dto\response\RolRespuestaDto.class
+com\qualitas\portal\fraudes\account\application\service\impl\DashBoardServiceImpl.class
 com\qualitas\portal\fraudes\account\application\service\UsuarioService.class
 com\qualitas\portal\fraudes\account\domain\model\Vehiculo.class
 com\qualitas\portal\fraudes\account\application\service\impl\CatalogoDatosService2Impl.class

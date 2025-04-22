@@ -66,8 +66,11 @@ public class CotizacionDaoImpl implements CotizacionDao {
 
 
 
-
-
+    @Override
+    public List<Cotizacion> listarCotizacionesSinPaginado() {
+        return sqlSession.selectList(
+                "com.qualitas.portal.fraudes.account.infrastructure.dao.CotizacionDao.listarCotizacionesSinPaginado");
+    }
 
     @Override
     public List<Cotizacion> listarCotizacionesPaginadas(int offset, int limit) {

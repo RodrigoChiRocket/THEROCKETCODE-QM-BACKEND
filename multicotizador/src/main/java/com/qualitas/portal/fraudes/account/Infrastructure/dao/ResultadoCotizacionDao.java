@@ -1,5 +1,6 @@
 package com.qualitas.portal.fraudes.account.Infrastructure.dao;
 
+import com.qualitas.portal.fraudes.account.application.dto.response.EstadisticasCoberturaDTO;
 import com.qualitas.portal.fraudes.account.domain.model.ResultadoCotizacion;
 import org.apache.ibatis.annotations.Param;
 
@@ -9,6 +10,8 @@ import java.util.Map;
 
 public interface ResultadoCotizacionDao {
     ResultadoCotizacion crearResultadoCotizacion(ResultadoCotizacion resultado);
+
+
     ResultadoCotizacion obtenerResultadoCotizacion(BigDecimal id);
     List<ResultadoCotizacion> listarResultadosCotizacion();
     ResultadoCotizacion actualizarResultadoCotizacion(ResultadoCotizacion resultado);
@@ -28,4 +31,34 @@ public interface ResultadoCotizacionDao {
     List<ResultadoCotizacion> filtrarResultadosCotizacion(Map<String, Object> parametros);
 
     int contarRegistrosPorRutina(BigDecimal rutinaClave);
+
+
+
+
+
+    /*
+    Catalogo y rutinas
+     */
+
+    boolean existeCotizacionCompletadaPorRutina(BigDecimal rutinaCargaClave);
+
+    ResultadoCotizacion crearResultadoCotizacionCatalogo(ResultadoCotizacion resultadoCotizacion);
+
+
+    List<ResultadoCotizacion> obtenerResultadoDeCatalogo();
+
+
+    void eliminarResultadosCotizacionCompletados(BigDecimal rutinaCargaClave);
+
+
+
+
+
+    /*
+    Dashboard
+     */
+
+    List<Map<String, Object>> obtenerConteoResultadosPorMes();
+
+    EstadisticasCoberturaDTO obtenerEstadisticasCoberturasMesActual();
 }

@@ -27,7 +27,15 @@ public class ResultadoCotizacion {
     private int iDanoVehiculo;
     private Date dFechaCreacion;
 
+    private Integer bCatalogoDato;
 
+    public Integer getbCatalogoDato() {
+        return bCatalogoDato;
+    }
+
+    public void setbCatalogoDato(Integer bCatalogoDato) {
+        this.bCatalogoDato = bCatalogoDato;
+    }
 
     private BigDecimal iRutinaCargaClave;
 

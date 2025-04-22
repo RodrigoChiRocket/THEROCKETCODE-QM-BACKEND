@@ -16,4 +16,13 @@ public interface RutinaCargaDao {
 
     void actualizarProgramacion(BigDecimal id, LocalDateTime nuevaProgramacion);
     void actualizarHabilitado(BigDecimal id, Integer habilitado);
+
+    int contarRegistrosPorRutina(BigDecimal rutinaClave);
+
+
+
+    void registrarInicioEjecucion(BigDecimal rutinaId);
+    void registrarFinEjecucion(BigDecimal rutinaId);
+    Long obtenerTiempoEjecucion(BigDecimal rutinaId);
+    void actualizarTiempoEjecucion(BigDecimal rutinaId);
 }

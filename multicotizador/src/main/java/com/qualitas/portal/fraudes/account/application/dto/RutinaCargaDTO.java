@@ -3,6 +3,7 @@ package com.qualitas.portal.fraudes.account.application.dto;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 
 public class RutinaCargaDTO {
     private BigDecimal iRutinaCargaId;
@@ -18,6 +19,12 @@ public class RutinaCargaDTO {
     private String vEstatus;
     private Integer bHabilitado;
     private String VStringHabiliatdo;
+    private LocalTime horaProgramada;
+
+    private LocalDateTime dInicioEjecucion;
+    private LocalDateTime dFinEjecucion;
+
+    private Long lTiempoEjecucion; // en milisegundos
 
     public RutinaCargaDTO() {
     }
@@ -35,7 +42,42 @@ public class RutinaCargaDTO {
         this.VStringHabiliatdo = bHabilitado == 1 ? "SI" : "NO"; // Asignación automática
     }
 
+
+
     // Getters y Setters
+
+
+    public LocalDateTime getdInicioEjecucion() {
+        return dInicioEjecucion;
+    }
+
+    public void setdInicioEjecucion(LocalDateTime dInicioEjecucion) {
+        this.dInicioEjecucion = dInicioEjecucion;
+    }
+
+    public LocalDateTime getdFinEjecucion() {
+        return dFinEjecucion;
+    }
+
+    public void setdFinEjecucion(LocalDateTime dFinEjecucion) {
+        this.dFinEjecucion = dFinEjecucion;
+    }
+
+    public Long getlTiempoEjecucion() {
+        return lTiempoEjecucion;
+    }
+
+    public void setlTiempoEjecucion(Long lTiempoEjecucion) {
+        this.lTiempoEjecucion = lTiempoEjecucion;
+    }
+
+    public LocalTime getHoraProgramada() {
+        return horaProgramada;
+    }
+
+    public void setHoraProgramada(LocalTime horaProgramada) {
+        this.horaProgramada = horaProgramada;
+    }
 
     public String getVStringHabiliatdo() {
         return this.bHabilitado == 1 ? "SI" : "NO"; // Siempre devuelve el valor calculado

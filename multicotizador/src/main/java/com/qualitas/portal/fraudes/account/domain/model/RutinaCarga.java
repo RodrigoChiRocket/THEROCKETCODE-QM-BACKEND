@@ -9,7 +9,6 @@ import java.util.Date;
 public class RutinaCarga {
     private BigDecimal iRutinaCargaId;
     private String vPortal;
-
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private LocalDateTime dFechaActualizacion;
     private Integer iDatosObtenidos;
@@ -17,10 +16,39 @@ public class RutinaCarga {
     private String vEstatus;
     private Integer bHabilitado;
 
+
+    private LocalDateTime dInicioEjecucion;
+    private LocalDateTime dFinEjecucion;
+
+    private Long lTiempoEjecucion; // en milisegundos
+
     public RutinaCarga() {
     }
 
 
+    public LocalDateTime getdInicioEjecucion() {
+        return dInicioEjecucion;
+    }
+
+    public void setdInicioEjecucion(LocalDateTime dInicioEjecucion) {
+        this.dInicioEjecucion = dInicioEjecucion;
+    }
+
+    public LocalDateTime getdFinEjecucion() {
+        return dFinEjecucion;
+    }
+
+    public void setdFinEjecucion(LocalDateTime dFinEjecucion) {
+        this.dFinEjecucion = dFinEjecucion;
+    }
+
+    public Long getlTiempoEjecucion() {
+        return lTiempoEjecucion;
+    }
+
+    public void setlTiempoEjecucion(Long lTiempoEjecucion) {
+        this.lTiempoEjecucion = lTiempoEjecucion;
+    }
 
     public BigDecimal getiRutinaCargaId() {
         return iRutinaCargaId;

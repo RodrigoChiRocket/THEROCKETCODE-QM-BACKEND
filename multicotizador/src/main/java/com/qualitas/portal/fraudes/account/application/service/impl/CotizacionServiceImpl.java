@@ -511,6 +511,87 @@ public class CotizacionServiceImpl implements CotizacionService {
             }
         }).collect(Collectors.toList());
     }
+
+
+
+    @Override
+    public List<CotizacionCompletaResponseDTO> listarCotizacionesCompletas() {
+        // Obtener todas las cotizaciones sin paginación
+        List<Cotizacion> cotizaciones = cotizacionDao.listarCotizacionesSinPaginado();
+
+        return cotizaciones.stream().map(cotizacion -> {
+            try {
+                // 1. Obtener datos de persona (manejar posible null)
+                PersonaDTO persona = Optional.ofNullable(cotizacion.getiPersonaClave())
+                        .map(personaService::obtenerPersona)
+                        .orElse(new PersonaDTO());
+
+                // 2. Obtener datos del auto (manejar posible null)
+                AutoDTO auto = Optional.ofNullable(cotizacion.getiAutoClave())
+                        .map(autoService::obtenerAuto)
+                        .orElse(new AutoDTO());
+
+                // 3. Obtener y asignar nombres completos del auto con manejo de null
+                if (auto.getiAutoMarcaClave() != null) {
+                    AutoMarcaDTO marca = Optional.ofNullable(autoMarcaService.obtenerAutoMarca(auto.getiAutoMarcaClave()))
+                            .orElse(new AutoMarcaDTO());
+                    auto.setvNombreMarca(marca.getvNombre() != null ? marca.getvNombre() : "");
+                }
+
+                if (auto.getiAutoModeloClave() != null) {
+                    AutoModeloDTO modelo = Optional.ofNullable(autoModeloService.obtenerAuto(auto.getiAutoModeloClave()))
+                            .orElse(new AutoModeloDTO());
+                    auto.setvNombreModelo(modelo.getvNombre() != null ? modelo.getvNombre() : "");
+                }
+
+                if (auto.getiAutoDescripcionClave() != null) {
+                    AutoDescripcionDTO descripcion = Optional.ofNullable(autoDescripcionService.obtenerAuto(auto.getiAutoDescripcionClave()))
+                            .orElse(new AutoDescripcionDTO());
+                    auto.setvNombreDescripcion(descripcion.getvNombre() != null ? descripcion.getvNombre() : "");
+                }
+
+                // 4. Convertir cotización a DTO con nombres de relaciones
+                CotizacionDTO cotizacionDTO = convertToDTO(cotizacion);
+
+                // Obtener y asignar nombres de las entidades relacionadas con manejo de null
+                UsoDTO usoDTO = Optional.ofNullable(usoService.obtenerUso(cotizacion.getiUsoClave()))
+                        .orElse(new UsoDTO());
+                CategoriaVehiculoDTO categoriaVehiculoDTO = Optional.ofNullable(
+                                categoriaVehiculoService.obtenerCategoriaVehiculo(cotizacion.getiCategoriaVehiculoClave()))
+                        .orElse(new CategoriaVehiculoDTO());
+                TipoSeguroDTO tipoSeguroDTO = Optional.ofNullable(
+                                tipoSeguroService.obtenerTipoSeguro(cotizacion.getiTipoSeguroClave()))
+                        .orElse(new TipoSeguroDTO());
+                TipoAutoDTO tipoAutoDTO = Optional.ofNullable(
+                                tipoAutoService.obtenerTipoAuto(cotizacion.getiTipoAutoClave()))
+                        .orElse(new TipoAutoDTO());
+
+                cotizacionDTO.setvNombreUso(usoDTO.getvNombre() != null ? usoDTO.getvNombre() : "");
+                cotizacionDTO.setvNombreCategoriaVehiculo(
+                        categoriaVehiculoDTO.getvNombre() != null ? categoriaVehiculoDTO.getvNombre() : "");
+                cotizacionDTO.setvNombreTipoSeguro(
+                        tipoSeguroDTO.getvNombre() != null ? tipoSeguroDTO.getvNombre() : "");
+                cotizacionDTO.setvNombreTipoAUto(
+                        tipoAutoDTO.getvNombre() != null ? tipoAutoDTO.getvNombre() : "");
+
+                // 5. Crear y retornar respuesta completa
+                CotizacionCompletaResponseDTO responseDTO = new CotizacionCompletaResponseDTO();
+                responseDTO.setPersona(persona);
+                responseDTO.setAuto(auto);
+                responseDTO.setCotizacion(cotizacionDTO);
+
+                return responseDTO;
+            } catch (Exception e) {
+                // Loggear el error si es necesario
+                System.err.println("Error procesando cotización ID: " + cotizacion.getiCotizacionId() + ": " + e.getMessage());
+
+                // Devolver una respuesta parcial con los datos que sí se pudieron obtener
+                CotizacionCompletaResponseDTO responseDTO = new CotizacionCompletaResponseDTO();
+                responseDTO.setCotizacion(convertToDTO(cotizacion));
+                return responseDTO;
+            }
+        }).collect(Collectors.toList());
+    }
     @Override
     public int contarTotalCotizaciones() {
         return cotizacionDao.contarTotalCotizaciones();

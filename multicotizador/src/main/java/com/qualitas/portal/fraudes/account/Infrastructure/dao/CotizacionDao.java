@@ -17,5 +17,7 @@ public interface CotizacionDao {
 
     //PAGINADO:
     List<Cotizacion> listarCotizacionesPaginadas(int pagina, int tamanioPagina);
+
+    List<Cotizacion> listarCotizacionesSinPaginado();
     int contarTotalCotizaciones();
 }

@@ -7,21 +7,36 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class RutinaCargaConvertDTOImpl implements RutinaCargaConvertDTO {
-
     @Override
     public RutinaCargaDTO entityToDto(RutinaCarga rutinaCarga) {
         if (rutinaCarga == null) {
             return null;
         }
-        return new RutinaCargaDTO(
-                rutinaCarga.getiRutinaCargaId(),
-                rutinaCarga.getvPortal(),
-                rutinaCarga.getdFechaActualizacion(),
-                rutinaCarga.getiDatosObtenidos(),
-                rutinaCarga.getdProgramacion(),
-                rutinaCarga.getvEstatus(),
-                rutinaCarga.getbHabilitado()
-        );
+
+        // Crear DTO vacío
+        RutinaCargaDTO dto = new RutinaCargaDTO();
+
+        // Mapear campos básicos
+        dto.setiRutinaCargaId(rutinaCarga.getiRutinaCargaId());
+        dto.setvPortal(rutinaCarga.getvPortal());
+        dto.setdFechaActualizacion(rutinaCarga.getdFechaActualizacion());
+        dto.setiDatosObtenidos(rutinaCarga.getiDatosObtenidos());
+        dto.setdProgramacion(rutinaCarga.getdProgramacion());
+        dto.setvEstatus(rutinaCarga.getvEstatus());
+        dto.setbHabilitado(rutinaCarga.getbHabilitado());
+
+        // Mapear campos de ejecución
+        dto.setdInicioEjecucion(rutinaCarga.getdInicioEjecucion());
+        dto.setdFinEjecucion(rutinaCarga.getdFinEjecucion());
+        dto.setlTiempoEjecucion(rutinaCarga.getlTiempoEjecucion());
+
+        // Calcular campos derivados
+        if (rutinaCarga.getdProgramacion() != null) {
+            dto.setHoraProgramada(rutinaCarga.getdProgramacion().toLocalTime());
+        }
+        // VStringHabilitado se calcula automáticamente en el getter
+
+        return dto;
     }
 
     @Override
@@ -29,7 +44,9 @@ public class RutinaCargaConvertDTOImpl implements RutinaCargaConvertDTO {
         if (rutinaCargaDTO == null) {
             return null;
         }
+
         RutinaCarga rutinaCarga = new RutinaCarga();
+        // Mapear campos básicos
         rutinaCarga.setiRutinaCargaId(rutinaCargaDTO.getiRutinaCargaId());
         rutinaCarga.setvPortal(rutinaCargaDTO.getvPortal());
         rutinaCarga.setdFechaActualizacion(rutinaCargaDTO.getdFechaActualizacion());
@@ -37,6 +54,11 @@ public class RutinaCargaConvertDTOImpl implements RutinaCargaConvertDTO {
         rutinaCarga.setdProgramacion(rutinaCargaDTO.getdProgramacion());
         rutinaCarga.setvEstatus(rutinaCargaDTO.getvEstatus());
         rutinaCarga.setbHabilitado(rutinaCargaDTO.getbHabilitado());
+
+        // Mapear campos de ejecución
+        rutinaCarga.setdInicioEjecucion(rutinaCargaDTO.getdInicioEjecucion());
+        rutinaCarga.setdFinEjecucion(rutinaCargaDTO.getdFinEjecucion());
+        rutinaCarga.setlTiempoEjecucion(rutinaCargaDTO.getlTiempoEjecucion());
 
         return rutinaCarga;
     }

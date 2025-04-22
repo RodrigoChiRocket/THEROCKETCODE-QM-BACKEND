@@ -27,6 +27,15 @@ public class ResultadoCotizacionServiceImpl implements ResultadoCotizacionServic
     public ResultadoCotizacionDTO crearResultadoCotizacion(ResultadoCotizacionDTO dto) {
         ResultadoCotizacion resultado = resultadoCotizacionConvertDTO.dtoToEntity(dto);
 
+        resultadoCotizacionDao.crearResultadoCotizacion(resultado);
+        return resultadoCotizacionConvertDTO.entityToDto(resultado);
+    }
+
+
+    @Override
+    public ResultadoCotizacionDTO crearResultadoCotizacionCatalogo(ResultadoCotizacionDTO dto) {
+        ResultadoCotizacion resultado = resultadoCotizacionConvertDTO.dtoToEntity(dto);
+
         String nombreSeguro = dto.getvNombreSeguro();
 
         if ("Chubb".equals(nombreSeguro)) {
@@ -41,7 +50,7 @@ public class ResultadoCotizacionServiceImpl implements ResultadoCotizacionServic
             resultado.setiRutinaCargaClave(new BigDecimal(5));
         }
 
-        resultadoCotizacionDao.crearResultadoCotizacion(resultado);
+        resultadoCotizacionDao.crearResultadoCotizacionCatalogo(resultado);
         return resultadoCotizacionConvertDTO.entityToDto(resultado);
     }
 
@@ -125,4 +134,35 @@ public class ResultadoCotizacionServiceImpl implements ResultadoCotizacionServic
     public int contarRegistrosPorRutina(BigDecimal rutinaClave) {
         return resultadoCotizacionDao.contarRegistrosPorRutina(rutinaClave);
     }
+
+    @Override
+    public List<ResultadoCotizacionDTO> obtenerResultadoCotizacionPorCatalogo() {
+        List<ResultadoCotizacion> resultadoCotizacions = resultadoCotizacionDao.obtenerResultadoDeCatalogo();
+
+
+        return resultadoCotizacions.stream()
+                .map(resultado -> resultadoCotizacionConvertDTO.entityToDto(resultado))
+                .collect(Collectors.toList());
+    }
+
+
+    @Override
+    public boolean existeCotizacionCompletadaPorRutina(BigDecimal rutinaCargaClave) {
+        return resultadoCotizacionDao.existeCotizacionCompletadaPorRutina(rutinaCargaClave);
+    }
+
+    @Override
+    public boolean eliminarResultadosCompletadosPorRutina(BigDecimal rutinaCargaClave) {
+        // Verificamos primero si existe alguna cotización completada
+        boolean existeCompletada = resultadoCotizacionDao.existeCotizacionCompletadaPorRutina(rutinaCargaClave);
+
+        if(existeCompletada) {
+            // Si existe, procedemos a eliminar
+            resultadoCotizacionDao.eliminarResultadosCotizacionCompletados(rutinaCargaClave);
+            return true;
+        }
+        return false;
+    }
+
+
 }

@@ -1,6 +1,7 @@
 package com.qualitas.portal.fraudes.account.Infrastructure.dao.impl;
 
 import com.qualitas.portal.fraudes.account.Infrastructure.dao.ResultadoCotizacionDao;
+import com.qualitas.portal.fraudes.account.application.dto.response.EstadisticasCoberturaDTO;
 import com.qualitas.portal.fraudes.account.domain.model.ResultadoCotizacion;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,9 +24,12 @@ public class ResultadoCotizacionDaoImpl implements ResultadoCotizacionDao {
 
     @Override
     public ResultadoCotizacion crearResultadoCotizacion(ResultadoCotizacion resultadoCotizacion) {
-        sqlSession.insert("com.qualitas.portal.fraudes.account.infrastructure.dao.ResultadoCotizacionDao.crearResultadoCotizacion", resultadoCotizacion);
+        sqlSession.insert("com.qualitas.portal.fraudes.account.infrastructure.dao.ResultadoCotizacionDao.crearResultadoCotizacionSinCatalogo", resultadoCotizacion);
         return resultadoCotizacion;
     }
+
+
+
 
     @Override
     public ResultadoCotizacion obtenerResultadoCotizacion(BigDecimal id) {
@@ -97,6 +101,64 @@ public class ResultadoCotizacionDaoImpl implements ResultadoCotizacionDao {
         return sqlSession.selectOne(
                 "com.qualitas.portal.fraudes.account.infrastructure.dao.ResultadoCotizacionDao.contarRegistrosPorRutina",
                 rutinaClave
+        );
+    }
+
+
+
+
+
+
+    /*
+    Catalogo y Rutinas
+     */
+
+    @Override
+    public boolean existeCotizacionCompletadaPorRutina(BigDecimal rutinaCargaClave) {
+        return sqlSession.selectOne(
+                "com.qualitas.portal.fraudes.account.infrastructure.dao.ResultadoCotizacionDao.existeCotizacionCompletadaPorRutina",
+                rutinaCargaClave);
+    }
+
+
+    @Override
+    public ResultadoCotizacion crearResultadoCotizacionCatalogo(ResultadoCotizacion resultadoCotizacion) {
+        resultadoCotizacion.setbCatalogoDato(1);
+        sqlSession.insert("com.qualitas.portal.fraudes.account.infrastructure.dao.ResultadoCotizacionDao.crearResultadoCotizacion", resultadoCotizacion);
+        return resultadoCotizacion;
+    }
+
+    @Override
+    public List<ResultadoCotizacion> obtenerResultadoDeCatalogo() {
+        return sqlSession.selectList("com.qualitas.portal.fraudes.account.infrastructure.dao.ResultadoCotizacionDao.obtenerResultadosConCatalogo");
+    }
+
+
+    @Override
+    public void eliminarResultadosCotizacionCompletados(BigDecimal rutinaCargaClave) {
+        sqlSession.delete(
+                "com.qualitas.portal.fraudes.account.infrastructure.dao.ResultadoCotizacionDao.eliminarResultadosCotizacionCompletados",
+                rutinaCargaClave);
+    }
+
+
+
+
+
+
+    /*
+    Dashboard
+     */
+    @Override
+    public List<Map<String, Object>> obtenerConteoResultadosPorMes() {
+        return sqlSession.selectList(
+                "com.qualitas.portal.fraudes.account.infrastructure.dao.ResultadoCotizacionDao.obtenerConteoResultadosPorMes"
+        );
+    }
+    @Override
+    public EstadisticasCoberturaDTO obtenerEstadisticasCoberturasMesActual() {
+        return sqlSession.selectOne(
+                "com.qualitas.portal.fraudes.account.infrastructure.dao.ResultadoCotizacionDao.obtenerEstadisticasCoberturasMesActual"
         );
     }
 }

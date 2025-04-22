@@ -35,6 +35,15 @@ public class ResultadoConsultaServiceImpl implements ResultadoConsultaService {
     }
 
     @Override
+    public ResultadoConsultaDTO crearResultadoConsultaCatalogo(ResultadoConsultaDTO resultadoConsultaDTO) {
+        logger.info("Datos recibidos para crear ResultadoConsulta: {}", resultadoConsultaDTO);
+        ResultadoConsulta resultadoConsulta = resultadoConsultaConvertDTO.dtoToEntity(resultadoConsultaDTO);
+        resultadoConsultaDao.crearResultadoConsulta(resultadoConsulta);
+        logger.info("ResultadoConsulta guardado con éxito en la base de datos: {}", resultadoConsulta);
+        return resultadoConsultaConvertDTO.entityToDto(resultadoConsulta);
+    }
+
+    @Override
     public ResultadoConsultaDTO obtenerResultadoConsulta(BigDecimal id) {
         ResultadoConsulta resultadoConsulta = resultadoConsultaDao.obtenerResultadoConsulta(id);
         if (resultadoConsulta == null) {

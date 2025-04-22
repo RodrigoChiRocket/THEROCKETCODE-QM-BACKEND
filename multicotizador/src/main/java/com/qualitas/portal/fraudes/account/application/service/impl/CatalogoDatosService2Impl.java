@@ -1,5 +1,6 @@
 package com.qualitas.portal.fraudes.account.application.service.impl;
 
+import com.qualitas.portal.fraudes.account.Infrastructure.dao.ResultadoCotizacionDao;
 import com.qualitas.portal.fraudes.account.application.dto.AutoDTO;
 import com.qualitas.portal.fraudes.account.application.dto.PersonaDTO;
 import com.qualitas.portal.fraudes.account.application.dto.response.CotizacionCompletaResponseDTO;
@@ -9,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 
@@ -24,6 +26,9 @@ public class CatalogoDatosService2Impl implements CatalogoDatosService2 {
     @Autowired
     private ExcelProcessorService excelProcessorService;
 
+    @Autowired
+    private ResultadoCotizacionDao resultadoCotizacionDao;
+
     @Override
     public CotizacionCompletaResponseDTO crearCotizacionCompletaDesdeCatalogo(CatalogoDatos catalogoDatos) {
         PersonaDTO persona = personaCotizacionService.crearPersonaDesdeCatalogo(catalogoDatos);
@@ -34,6 +39,10 @@ public class CatalogoDatosService2Impl implements CatalogoDatosService2 {
     @Override
     public List<CatalogoDatos> procesarCatalogoExcel(MultipartFile archivo) {
         return excelProcessorService.procesarArchivoExcel(archivo);
+    }
+
+    public boolean verificarCotizacionesCompletadas(BigDecimal rutinaCargaClave) {
+        return resultadoCotizacionDao.existeCotizacionCompletadaPorRutina(rutinaCargaClave);
     }
 
 }
