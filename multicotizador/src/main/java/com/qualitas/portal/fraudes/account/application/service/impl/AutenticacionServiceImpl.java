@@ -1,41 +1,81 @@
 package com.qualitas.portal.fraudes.account.application.service.impl;
 
-import com.qualitas.portal.fraudes.account.application.dto.response.InicioSesionRespuestaDto;
-import com.qualitas.portal.fraudes.account.application.dto.request.CredencialesDto;
-import com.qualitas.portal.fraudes.account.domain.model.Usuario;
+import com.qualitas.portal.fraudes.account.Infrastructure.dao.UsuarioDao;
+import com.qualitas.portal.fraudes.account.application.dto.request.LoginRequestDTO;
+import com.qualitas.portal.fraudes.account.application.dto.request.RegisterRequestDTO;
+import com.qualitas.portal.fraudes.account.application.dto.response.AuthResponseDTO;
 import com.qualitas.portal.fraudes.account.application.service.AutenticacionService;
 import com.qualitas.portal.fraudes.account.application.service.UsuarioService;
+import com.qualitas.portal.fraudes.account.domain.model.Usuario;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.math.BigDecimal;
-import java.util.List;
 
 @Service
 public class AutenticacionServiceImpl implements AutenticacionService {
 
     @Autowired
-    private UsuarioService usuarioService;
-    private static final Logger logger = LoggerFactory.getLogger(AutenticacionServiceImpl.class);
+    private AuthenticationManager authenticationManager;
 
     @Autowired
-    AutenticacionService autenticacionService;
+    private UsuarioService usuarioService;
+    @Autowired
+    private UsuarioDao usuarioDao;
+
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
     @Override
-    public InicioSesionRespuestaDto iniciarSesion(CredencialesDto credencialesUsuario) {
-        Usuario usuario = usuarioService.esUsuarioValido(credencialesUsuario);
-        List<String> roles = usuarioService.obtenerRolesUsuario(usuario.getiUsuaID().longValue());
+    public AuthResponseDTO autenticarUsuario(LoginRequestDTO loginRequest) {
+        // Solo autentica, no genera token aquí
+        Authentication authentication = authenticationManager.authenticate(
+                new UsernamePasswordAuthenticationToken(
+                        loginRequest.getUsername(),
+                        loginRequest.getPassword()
+                )
+        );
 
-        //String token = JwtUtil.generarToken(usuario.getvEmail(), usuario.getiUsuaID().longValue(), roles, JwtUtil.JWT_SEMILLA);
+        Usuario usuario = usuarioService.obtenerUsuarioPorEmail(loginRequest.getUsername());
+        String rol = usuarioService.obtenerRolUsuario(usuario.getiIdUsuario().longValue());
 
-        return new InicioSesionRespuestaDto(usuario, null);
+        return new AuthResponseDTO(
+                null, // El token se generará en el controlador
+                usuario.getiIdUsuario(),
+                usuario.getvUsuario(),
+                rol
+        );
     }
 
     @Override
-    public BigDecimal registrarUsuario(Usuario usuario) {
+    public BigDecimal registrarUsuario(RegisterRequestDTO registerRequest) {
+        if (usuarioService.existeUsuarioenDB(registerRequest.getEmail())) {
+            throw new RuntimeException("El email ya está registrado");
+        }
+
+        Usuario usuario = new Usuario();
+        usuario.setvUsuario(registerRequest.getUsername());
+        usuario.setvEmail(registerRequest.getEmail());
+        usuario.setvPasswordHash(passwordEncoder.encode(registerRequest.getPassword()));
+        usuario.setiActivo(1);
+        usuario.setiIdRol(registerRequest.getRoleId());
+
         return usuarioService.crearUsuario(usuario);
     }
 
+
+    @Override
+    @Transactional
+    public void actualizarContrasenaPorEmail(String email, String nuevaContrasena) {
+        String contrasenaEncriptada = passwordEncoder.encode(nuevaContrasena);
+        int updated = usuarioDao.actualizarContrasenaPorEmail(email, contrasenaEncriptada);
+        if (updated == 0) {
+            throw new RuntimeException("No se pudo actualizar la contraseña para el email: " + email);
+        }
+    }
 }

@@ -77,10 +77,10 @@ public class EnvioCorreo {
     }
 
     // Correo de restablecimiento de contraseña
-    public boolean enviarCorreoRestablecimiento(String toEmail, String nombreUsuario, String codigo) {
+
+    public boolean enviarCorreoRestablecimiento(String toEmail, String nombreUsuario, String token) {
         System.setProperty("https.protocols", "TLSv1.2");
 
-        // Configuración de las propiedades para el servidor SMTP
         Properties properties = new Properties();
         properties.put("mail.smtp.host", host);
         properties.put("mail.smtp.port", port);
@@ -88,7 +88,6 @@ public class EnvioCorreo {
         properties.put("mail.smtp.ssl.enable", "true");
         properties.put("mail.smtp.ssl.protocols", "TLSv1.2");
 
-        // Crear una nueva sesión con autenticación
         Session session = Session.getInstance(properties, new Authenticator() {
             @Override
             protected PasswordAuthentication getPasswordAuthentication() {
@@ -97,38 +96,34 @@ public class EnvioCorreo {
         });
 
         try {
-            // Crear el mensaje
             Message message = new MimeMessage(session);
             message.setFrom(new InternetAddress(fromEmail));
             message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(toEmail));
-            message.setSubject("Código de Restablecimiento de Contraseña");
+            message.setSubject("Restablecimiento de Contraseña");
 
-            // Contenido del correo en formato HTML
+            String resetLink = "http://localhost:8080/multicotizador-api//api/auth/validate-token?token=" + token + "&email=" + toEmail;
+
             String contenidoHTML = "<html>" +
                     "<body>" +
                     "<h3>Estimado(a) " + nombreUsuario + ",</h3>" +
                     "<p>Hemos recibido una solicitud para restablecer tu contraseña.</p>" +
-                    "<p>Tu código de verificación es: <strong>" + codigo + "</strong></p>" +
-                    "<p>Este código es válido por 15 minutos.</p>" +
+                    "<p>Por favor, haz clic en el siguiente enlace para restablecer tu contraseña:</p>" +
+                    "<p><a href=\"" + resetLink + "\">Restablecer contraseña</a></p>" +
+                    "<p>Este enlace es válido por 5 minutos.</p>" +
+                    "<p>Si no solicitaste este restablecimiento, puedes ignorar este correo.</p>" +
                     "<p>Gracias,<br>Equipo Qualitas</p>" +
                     "</body>" +
                     "</html>";
 
-            // Adjuntar el contenido HTML al mensaje
             message.setContent(contenidoHTML, "text/html; charset=utf-8");
-
-            // Enviar el mensaje
             Transport.send(message);
-            System.out.println("Correo de restablecimiento enviado exitosamente.");
             return true;
-
         } catch (MessagingException e) {
-            System.err.println("Error al enviar el correo de restablecimiento a: " + toEmail);
             e.printStackTrace();
             return false;
         }
     }
 
-    // Correo de restablecimiento de contraseña
+
 
 }

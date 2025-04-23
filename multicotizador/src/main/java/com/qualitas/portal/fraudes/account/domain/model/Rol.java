@@ -3,30 +3,31 @@ package com.qualitas.portal.fraudes.account.domain.model;
 import java.math.BigDecimal;
 
 public class Rol {
-    private BigDecimal iRolId;
-    private String vRolNombre;
-
-    public Rol(BigDecimal iRolId, String vRolNombre) {
-        this.iRolId = iRolId;
-        this.vRolNombre = vRolNombre;
-    }
+    private BigDecimal iIdRol;
+    private String vNombre;
 
     public Rol() {
     }
 
-    public BigDecimal getiRolId() {
-        return iRolId;
+    public Rol(BigDecimal iIdRol, String vNombre) {
+        this.iIdRol = iIdRol;
+        this.vNombre = vNombre;
     }
 
-    public void setiRolId(BigDecimal iRolId) {
-        this.iRolId = iRolId;
+    // Getters y Setters
+    public BigDecimal getiIdRol() {
+        return iIdRol;
     }
 
-    public String getvRolNombre() {
-        return vRolNombre;
+    public void setiIdRol(BigDecimal iIdRol) {
+        this.iIdRol = iIdRol;
     }
 
-    public void setvRolNombre(String vRolNombre) {
-        this.vRolNombre = vRolNombre;
+    public String getvNombre() {
+        return vNombre;
+    }
+
+    public void setvNombre(String vNombre) {
+        this.vNombre = vNombre;
     }
 }

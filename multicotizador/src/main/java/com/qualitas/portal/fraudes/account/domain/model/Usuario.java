@@ -3,33 +3,41 @@ package com.qualitas.portal.fraudes.account.domain.model;
 import java.math.BigDecimal;
 
 public class Usuario {
-
-    private BigDecimal iUsuaID;
+    private BigDecimal iIdUsuario;
+    private String vUsuario;
     private String vEmail;
-    private String vNombreCompleto;
-    private String vContrasena;
-    private BigDecimal iRolClav;
-    private String vCelular;
+    private String vPasswordHash;
+    private Integer iActivo;
+    private BigDecimal iIdRol;
 
-
+    // Constructores
     public Usuario() {
     }
 
-    public Usuario(BigDecimal iUsuaID, String vEmail, String vNombreCompleto, String vContrasena, BigDecimal iRolClav, String vCelular) {
-        this.iUsuaID = iUsuaID;
+    public Usuario(BigDecimal iIdUsuario, String vUsuario, String vEmail, String vPasswordHash, Integer iActivo, BigDecimal iIdRol) {
+        this.iIdUsuario = iIdUsuario;
+        this.vUsuario = vUsuario;
         this.vEmail = vEmail;
-        this.vNombreCompleto = vNombreCompleto;
-        this.vContrasena = vContrasena;
-        this.iRolClav = iRolClav;
-        this.vCelular = vCelular;
+        this.vPasswordHash = vPasswordHash;
+        this.iActivo = iActivo;
+        this.iIdRol = iIdRol;
     }
 
-    public BigDecimal getiUsuaID() {
-        return iUsuaID;
+    // Getters y Setters
+    public BigDecimal getiIdUsuario() {
+        return iIdUsuario;
     }
 
-    public void setiUsuaID(BigDecimal iUsuaID) {
-        this.iUsuaID = iUsuaID;
+    public void setiIdUsuario(BigDecimal iIdUsuario) {
+        this.iIdUsuario = iIdUsuario;
+    }
+
+    public String getvUsuario() {
+        return vUsuario;
+    }
+
+    public void setvUsuario(String vUsuario) {
+        this.vUsuario = vUsuario;
     }
 
     public String getvEmail() {
@@ -40,46 +48,27 @@ public class Usuario {
         this.vEmail = vEmail;
     }
 
-    public String getvNombreCompleto() {
-        return vNombreCompleto;
+    public String getvPasswordHash() {
+        return vPasswordHash;
     }
 
-    public void setvNombreCompleto(String vNombreCompleto) {
-        this.vNombreCompleto = vNombreCompleto;
+    public void setvPasswordHash(String vPasswordHash) {
+        this.vPasswordHash = vPasswordHash;
     }
 
-    public String getvContrasena() {
-        return vContrasena;
+    public Integer getiActivo() {
+        return iActivo;
     }
 
-    public void setvContrasena(String vContrasena) {
-        this.vContrasena = vContrasena;
+    public void setiActivo(Integer iActivo) {
+        this.iActivo = iActivo;
     }
 
-    public BigDecimal getiRolClav() {
-        return iRolClav;
+    public BigDecimal getiIdRol() {
+        return iIdRol;
     }
 
-    public void setiRolClav(BigDecimal iRolClav) {
-        this.iRolClav = iRolClav;
-    }
-
-    public String getvCelular() {
-        return vCelular;
-    }
-
-    public void setvCelular(String vCelular) {
-        this.vCelular = vCelular;
-    }
-
-    @Override
-    public String toString() {
-        return "Usuario{" +
-                "iUsuaID=" + iUsuaID +
-                ", vEmail='" + vEmail + '\'' +
-                ", vNombreCompleto='" + vNombreCompleto + '\'' +
-                ", vContrasena='" + vContrasena + '\'' +
-                ", iRolClav=" + iRolClav +
-                '}';
+    public void setiIdRol(BigDecimal iIdRol) {
+        this.iIdRol = iIdRol;
     }
 }

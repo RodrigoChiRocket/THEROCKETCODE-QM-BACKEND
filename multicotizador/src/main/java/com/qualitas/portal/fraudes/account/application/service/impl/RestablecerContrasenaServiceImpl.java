@@ -20,7 +20,7 @@ public class RestablecerContrasenaServiceImpl implements RestablecerContrasenaSe
         // Verifica si el código de restablecimiento es válido
         if (codigoEmailService.verificarCodigoRestablecimiento(email, codigoIngresado)) {
             // Actualizar la contraseña del usuario
-            usuarioService.actualizarContrasena(email, nuevaContrasena);
+            //      usuarioService.actualizarContrasena(email, nuevaContrasena);
             // Eliminar el código de restablecimiento
             codigoEmailService.eliminarCodigoRestablecimiento(email);
         } else {
