@@ -12,10 +12,13 @@ public interface RutinaCargaDao {
     List<RutinaCarga> listarRutinas();
     void eliminarRutina(BigDecimal id);
 
-    void actualizarDatosObtenidos(BigDecimal id, Integer nuevosDatos);
+    /*
 
+     */
+    void actualizarDatosObtenidos(BigDecimal id, Integer nuevosDatos);
     void actualizarProgramacion(BigDecimal id, LocalDateTime nuevaProgramacion);
     void actualizarHabilitado(BigDecimal id, Integer habilitado);
+    void actualizarEstatus(BigDecimal id, String vEstatus);
 
     int contarRegistrosPorRutina(BigDecimal rutinaClave);
 

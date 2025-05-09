@@ -33,7 +33,6 @@ public class AutenticacionServiceImpl implements AutenticacionService {
 
     @Override
     public AuthResponseDTO autenticarUsuario(LoginRequestDTO loginRequest) {
-        // Solo autentica, no genera token aquí
         Authentication authentication = authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(
                         loginRequest.getUsername(),
@@ -44,11 +43,14 @@ public class AutenticacionServiceImpl implements AutenticacionService {
         Usuario usuario = usuarioService.obtenerUsuarioPorEmail(loginRequest.getUsername());
         String rol = usuarioService.obtenerRolUsuario(usuario.getiIdUsuario().longValue());
 
+        // Asegurar que el rol tenga el prefijo ROLE_
+        String normalizedRole = rol.startsWith("ROLE_") ? rol : "ROLE_" + rol;
+
         return new AuthResponseDTO(
-                null, // El token se generará en el controlador
+                null,
                 usuario.getiIdUsuario(),
                 usuario.getvUsuario(),
-                rol
+                normalizedRole
         );
     }
 

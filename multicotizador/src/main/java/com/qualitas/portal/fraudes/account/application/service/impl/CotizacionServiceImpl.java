@@ -339,8 +339,11 @@ public class CotizacionServiceImpl implements CotizacionService {
 
 
 
-    @Override
+    @Transactional
     public void eliminarCotizacion(BigDecimal id) {
+        // 1. Elimina resultados relacionados
+        cotizacionDao.eliminarResultadosRelacionados(id);
+        // 2. Elimina la cotización principal
         cotizacionDao.eliminarCotizacion(id);
     }
 

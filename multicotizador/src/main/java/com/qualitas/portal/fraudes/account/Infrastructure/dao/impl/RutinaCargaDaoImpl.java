@@ -92,6 +92,13 @@ public class RutinaCargaDaoImpl implements RutinaCargaDao {
         }
     }
 
+    @Override
+    public void actualizarEstatus(BigDecimal id, String vEstatus) {
+        Map<String, Object> parametros= new HashMap<>();
+        parametros.put("id", id);
+        parametros.put("vEstatus", vEstatus);
+        sqlSession.update("com.qualitas.portal.fraudes.account.Infrastructure.dao.RutinaCargaDao.actualizarEstatus", parametros);
+    }
 
 
     @Override

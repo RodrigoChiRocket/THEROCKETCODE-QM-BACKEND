@@ -1,6 +1,8 @@
 package com.qualitas.portal.fraudes.account.application.service;
 
 import com.qualitas.portal.fraudes.account.domain.dto.ResultadoCotizacionDTO;
+import com.qualitas.portal.fraudes.account.domain.model.ResultadoCotizacion;
+
 import java.math.BigDecimal;
 import java.util.List;
 
@@ -27,8 +29,11 @@ public interface ResultadoCotizacionService {
 
     int contarRegistrosPorRutina(BigDecimal rutinaClave);
 
+    List<ResultadoCotizacionDTO> obtenerResultadosCatalogoPorCotizacionClave(BigDecimal cotizacionClave);
+
     List<ResultadoCotizacionDTO> obtenerResultadoCotizacionPorCatalogo();
 
+    List<ResultadoCotizacion> obtenerResultadosDeCatalogoPorRutina(BigDecimal rutinaClave);
 
     boolean existeCotizacionCompletadaPorRutina(BigDecimal rutinaCargaClave);
 
@@ -38,5 +43,6 @@ public interface ResultadoCotizacionService {
      * @return true si se eliminaron registros, false si no había registros para eliminar
      */
     boolean eliminarResultadosCompletadosPorRutina(BigDecimal rutinaCargaClave);
+    void limpiarResultadosCompletadosYErrores(BigDecimal rutinaCargaClave);
 
 }

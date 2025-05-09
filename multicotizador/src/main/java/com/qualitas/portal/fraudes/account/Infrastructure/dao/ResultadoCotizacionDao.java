@@ -31,7 +31,7 @@ public interface ResultadoCotizacionDao {
     List<ResultadoCotizacion> filtrarResultadosCotizacion(Map<String, Object> parametros);
 
     int contarRegistrosPorRutina(BigDecimal rutinaClave);
-
+    void eliminarResultadosPorRutinaYEstado(BigDecimal rutinaCargaClave);
 
 
 
@@ -50,9 +50,11 @@ public interface ResultadoCotizacionDao {
 
     void eliminarResultadosCotizacionCompletados(BigDecimal rutinaCargaClave);
 
+    List<ResultadoCotizacion> obtenerResultadosPorCotizacionClaveYCatalogo(BigDecimal cotizacionClave);
 
+    void eliminarResultadosCotizacionPorClave(BigDecimal cotizacionClave);
 
-
+    List<ResultadoCotizacion> obtenerResultadosPorRutinaYCatalogo(BigDecimal rutinaClave);
 
     /*
     Dashboard

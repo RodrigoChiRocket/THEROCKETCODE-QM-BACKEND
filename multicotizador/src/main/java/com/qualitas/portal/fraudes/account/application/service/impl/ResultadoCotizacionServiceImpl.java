@@ -2,16 +2,16 @@ package com.qualitas.portal.fraudes.account.application.service.impl;
 
 import com.qualitas.portal.fraudes.account.Infrastructure.dao.ResultadoCotizacionDao;
 import com.qualitas.portal.fraudes.account.application.convertDTO.ResultadoCotizacionConvertDTO;
+import com.qualitas.portal.fraudes.account.application.service.CotizacionValidatorService;
 import com.qualitas.portal.fraudes.account.application.service.ResultadoCotizacionService;
 import com.qualitas.portal.fraudes.account.domain.dto.ResultadoCotizacionDTO;
 import com.qualitas.portal.fraudes.account.domain.model.ResultadoCotizacion;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.math.BigDecimal;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Service
@@ -23,6 +23,11 @@ public class ResultadoCotizacionServiceImpl implements ResultadoCotizacionServic
     @Autowired
     private ResultadoCotizacionConvertDTO resultadoCotizacionConvertDTO;
 
+
+
+    @Autowired
+    private CotizacionValidatorService validatorService;
+
     @Override
     public ResultadoCotizacionDTO crearResultadoCotizacion(ResultadoCotizacionDTO dto) {
         ResultadoCotizacion resultado = resultadoCotizacionConvertDTO.dtoToEntity(dto);
@@ -31,27 +36,80 @@ public class ResultadoCotizacionServiceImpl implements ResultadoCotizacionServic
         return resultadoCotizacionConvertDTO.entityToDto(resultado);
     }
 
-
     @Override
     public ResultadoCotizacionDTO crearResultadoCotizacionCatalogo(ResultadoCotizacionDTO dto) {
-        ResultadoCotizacion resultado = resultadoCotizacionConvertDTO.dtoToEntity(dto);
+        // 1. Obtener todos los resultados existentes para esta cotización clave
+        List<ResultadoCotizacion> existentes = resultadoCotizacionDao
+                .obtenerResultadosPorCotizacionClaveYCatalogo(dto.getiCotizacionClave());
 
-        String nombreSeguro = dto.getvNombreSeguro();
+        // 2. Buscar si ya existe uno con mismo seguro y cobertura
+        Optional<ResultadoCotizacion> existenteOpt = existentes.stream()
+                .filter(r -> r.getvNombreSeguro().equals(dto.getvNombreSeguro())
+                        && r.getvNombreCobertura().equals(dto.getvNombreCobertura()))
+                .findFirst();
 
-        if ("Chubb".equals(nombreSeguro)) {
-            resultado.setiRutinaCargaClave(new BigDecimal(1));
-        } else if ("Mapfre".equals(nombreSeguro)) {
-            resultado.setiRutinaCargaClave(new BigDecimal(2));
-        } else if ("GNP".equals(nombreSeguro)) {
-            resultado.setiRutinaCargaClave(new BigDecimal(3));
-        } else if ("AXA".equals(nombreSeguro)) {
-            resultado.setiRutinaCargaClave(new BigDecimal(4));
-        } else if ("HDI".equals(nombreSeguro)) {
-            resultado.setiRutinaCargaClave(new BigDecimal(5));
+        if (existenteOpt.isPresent()) {
+            ResultadoCotizacion existente = existenteOpt.get();
+
+            // 3. Convertir el DTO a entidad para comparar
+            ResultadoCotizacion nuevo = resultadoCotizacionConvertDTO.dtoToEntity(dto);
+
+            // 4. Comparar campos relevantes (excluyendo ID, fechas y campos de control)
+            if (sonIguales(existente, nuevo)) {
+
+                return null; // Indica que ya existe uno idéntico
+            } else {
+                // 5. Eliminar el existente para insertar el nuevo
+                resultadoCotizacionDao.eliminarResultadoCotizacion(existente.getiResultadoCotizacionId());
+
+            }
         }
+
+        // 6. Insertar el nuevo registro
+        ResultadoCotizacion resultado = resultadoCotizacionConvertDTO.dtoToEntity(dto);
+        String nombreSeguro = dto.getvNombreSeguro();
+        BigDecimal rutinaClave = obtenerRutinaClavePorSeguro(nombreSeguro);
+        resultado.setiRutinaCargaClave(rutinaClave);
+        resultado.setbCatalogoDato(1);
 
         resultadoCotizacionDao.crearResultadoCotizacionCatalogo(resultado);
         return resultadoCotizacionConvertDTO.entityToDto(resultado);
+    }
+
+    private boolean sonIguales(ResultadoCotizacion existente, ResultadoCotizacion nuevo) {
+        return Objects.equals(existente.getiCotizacionClave(), nuevo.getiCotizacionClave()) &&
+                Objects.equals(existente.getvNombreSeguro(), nuevo.getvNombreSeguro()) &&
+                Objects.equals(existente.getvNombreCobertura(), nuevo.getvNombreCobertura()) &&
+                Objects.equals(existente.getdPrecioTotal(), nuevo.getdPrecioTotal()) &&
+                Objects.equals(existente.getvPlazoCobertura(), nuevo.getvPlazoCobertura()) &&
+                Objects.equals(existente.getdPrimerPago(), nuevo.getdPrimerPago()) &&
+                Objects.equals(existente.getdPagosResta(), nuevo.getdPagosResta()) &&
+                Objects.equals(existente.getiVigencia(), nuevo.getiVigencia()) &&
+                Objects.equals(existente.getdDanosTerceros(), nuevo.getdDanosTerceros()) &&
+                Objects.equals(existente.getiRoboTotal(), nuevo.getiRoboTotal()) &&
+                Objects.equals(existente.getiRoboParcial(), nuevo.getiRoboParcial()) &&
+                Objects.equals(existente.getdGastosMedicos(), nuevo.getdGastosMedicos()) &&
+                Objects.equals(existente.getiDanosLlanta(), nuevo.getiDanosLlanta()) &&
+                Objects.equals(existente.getiDanoCristal(), nuevo.getiDanoCristal()) &&
+                Objects.equals(existente.getiReposicionLlave(), nuevo.getiReposicionLlave()) &&
+                Objects.equals(existente.isbPerdidaTotal(), nuevo.isbPerdidaTotal()) &&
+                Objects.equals(existente.getdFallecimiento(), nuevo.getdFallecimiento()) &&
+                Objects.equals(existente.isbDefensaLegal(), nuevo.isbDefensaLegal()) &&
+                Objects.equals(existente.isbAsistencialVialCarretera(), nuevo.isbAsistencialVialCarretera()) &&
+                Objects.equals(existente.getiDanoVehiculo(), nuevo.getiDanoVehiculo());
+    }
+    private BigDecimal obtenerRutinaClavePorSeguro(String nombreSeguro) {
+        if (nombreSeguro == null) {
+            return null;
+        }
+        switch (nombreSeguro) {
+            case "Chubb": return new BigDecimal(1);
+            case "Mapfre": return new BigDecimal(2);
+            case "GNP": return new BigDecimal(3);
+            case "AXA": return new BigDecimal(4);
+            case "HDI": return new BigDecimal(5);
+            default: return null;
+        }
     }
 
 
@@ -162,6 +220,27 @@ public class ResultadoCotizacionServiceImpl implements ResultadoCotizacionServic
             return true;
         }
         return false;
+    }
+
+    @Override
+    @Transactional
+    public void limpiarResultadosCompletadosYErrores(BigDecimal rutinaCargaClave) {
+        resultadoCotizacionDao.eliminarResultadosPorRutinaYEstado(rutinaCargaClave);
+    }
+    @Override
+    public List<ResultadoCotizacion> obtenerResultadosDeCatalogoPorRutina(BigDecimal rutinaClave) {
+        return resultadoCotizacionDao.obtenerResultadosPorRutinaYCatalogo(rutinaClave);
+    }
+
+    @Override
+    public List<ResultadoCotizacionDTO> obtenerResultadosCatalogoPorCotizacionClave(BigDecimal cotizacionClave) {
+        // Obtener resultados del DAO
+        List<ResultadoCotizacion> resultados = resultadoCotizacionDao.obtenerResultadosPorCotizacionClaveYCatalogo(cotizacionClave);
+
+        // Convertir a DTOs
+        return resultados.stream()
+                .map(resultadoCotizacionConvertDTO::entityToDto)
+                .collect(Collectors.toList());
     }
 
 

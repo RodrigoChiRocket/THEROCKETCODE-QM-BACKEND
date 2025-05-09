@@ -77,7 +77,6 @@ public class EnvioCorreo {
     }
 
     // Correo de restablecimiento de contraseña
-
     public boolean enviarCorreoRestablecimiento(String toEmail, String nombreUsuario, String token) {
         System.setProperty("https.protocols", "TLSv1.2");
 
@@ -99,19 +98,47 @@ public class EnvioCorreo {
             Message message = new MimeMessage(session);
             message.setFrom(new InternetAddress(fromEmail));
             message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(toEmail));
-            message.setSubject("Restablecimiento de Contraseña");
+            message.setSubject("Restablecimiento de Contraseña - Qualitas");
 
-            String resetLink = "http://localhost:8080/multicotizador-api//api/auth/validate-token?token=" + token + "&email=" + toEmail;
-
-            String contenidoHTML = "<html>" +
+            String resetLink = "http://localhost:4200/#/reset-password?token=" + token + "&email=" + toEmail;
+            String contenidoHTML = "<!DOCTYPE html>" +
+                    "<html>" +
+                    "<head>" +
+                    "    <meta charset=\"UTF-8\">" +
+                    "    <style>" +
+                    "        body { font-family: 'Arial', sans-serif; line-height: 1.6; color: #333333; margin: 0; padding: 0; }" +
+                    "        .container { max-width: 600px; margin: 20px auto; border: 1px solid #e1e1e1; border-radius: 8px; overflow: hidden; }" +
+                    "        .header { background-color: #8cc63f; padding: 20px; text-align: center; }" +
+                    "        .header img { max-width: 180px; }" +
+                    "        .content { padding: 30px; background-color: #ffffff; }" +
+                    "        h1 { color: #8cc63f; font-size: 24px; margin-top: 0; }" +
+                    "        .button { display: inline-block; padding: 12px 24px; background-color: #8cc63f; color: #ffffff !important; text-decoration: none; border-radius: 4px; font-weight: bold; margin: 15px 0; }" +
+                    "        .footer { background-color: #f5f5f5; padding: 20px; text-align: center; font-size: 12px; color: #777777; }" +
+                    "        .divider { border-top: 1px solid #e1e1e1; margin: 20px 0; }" +
+                    "        .text-muted { color: #777777; font-size: 12px; }" +
+                    "    </style>" +
+                    "</head>" +
                     "<body>" +
-                    "<h3>Estimado(a) " + nombreUsuario + ",</h3>" +
-                    "<p>Hemos recibido una solicitud para restablecer tu contraseña.</p>" +
-                    "<p>Por favor, haz clic en el siguiente enlace para restablecer tu contraseña:</p>" +
-                    "<p><a href=\"" + resetLink + "\">Restablecer contraseña</a></p>" +
-                    "<p>Este enlace es válido por 5 minutos.</p>" +
-                    "<p>Si no solicitaste este restablecimiento, puedes ignorar este correo.</p>" +
-                    "<p>Gracias,<br>Equipo Qualitas</p>" +
+                    "    <div class=\"container\">" +
+                    "        <div class=\"header\">" +
+                    "            <!-- Reemplaza con tu logo -->" +
+                    "            <img src=\"https://via.placeholder.com/180x60/8cc63f/ffffff?text=Qualitas\" alt=\"Qualitas Logo\">" +
+                    "        </div>" +
+                    "        <div class=\"content\">" +
+                    "            <h1>Restablecer tu contraseña</h1>" +
+                    "            <p>Hola " + nombreUsuario + ",</p>" +
+                    "            <p>Recibimos una solicitud para restablecer la contraseña asociada a tu cuenta. Haz clic en el botón a continuación para continuar con el proceso.</p>" +
+                    "            <p><a href=\"" + resetLink + "\" class=\"button\">Restablecer contraseña</a></p>" +
+                    "            <p>Si no puedes hacer clic en el botón, copia y pega el siguiente enlace en tu navegador:</p>" +
+                    "            <p><small>" + resetLink + "</small></p>" +
+                    "            <div class=\"divider\"></div>" +
+                    "            <p class=\"text-muted\">Este enlace expirará en 5 minutos. Si no solicitaste un restablecimiento de contraseña, ignora este mensaje o contacta a nuestro equipo de soporte si tienes alguna pregunta.</p>" +
+                    "        </div>" +
+                    "        <div class=\"footer\">" +
+                    "            <p>&copy; 2023 Qualitas. Todos los derechos reservados.</p>" +
+                    "            <p>Si necesitas ayuda, contáctanos en <a href=\"mailto:soporte@qualitas.com\">soporte@qualitas.com</a></p>" +
+                    "        </div>" +
+                    "    </div>" +
                     "</body>" +
                     "</html>";
 

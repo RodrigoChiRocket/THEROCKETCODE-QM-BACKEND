@@ -133,7 +133,13 @@ public class ResultadoCotizacionDaoImpl implements ResultadoCotizacionDao {
         return sqlSession.selectList("com.qualitas.portal.fraudes.account.infrastructure.dao.ResultadoCotizacionDao.obtenerResultadosConCatalogo");
     }
 
-
+    @Override
+    public void eliminarResultadosPorRutinaYEstado(BigDecimal rutinaCargaClave) {
+        sqlSession.delete(
+                "com.qualitas.portal.fraudes.account.infrastructure.dao.ResultadoCotizacionDao.eliminarResultadosPorRutinaYEstado",
+                rutinaCargaClave
+        );
+    }
     @Override
     public void eliminarResultadosCotizacionCompletados(BigDecimal rutinaCargaClave) {
         sqlSession.delete(
@@ -142,8 +148,30 @@ public class ResultadoCotizacionDaoImpl implements ResultadoCotizacionDao {
     }
 
 
+    @Override
+    public List<ResultadoCotizacion> obtenerResultadosPorCotizacionClaveYCatalogo(BigDecimal cotizacionClave) {
+        return sqlSession.selectList(
+                "com.qualitas.portal.fraudes.account.infrastructure.dao.ResultadoCotizacionDao.obtenerResultadosPorCotizacionClaveYCatalogo",
+                cotizacionClave
+        );
+    }
+
+    @Override
+    public void eliminarResultadosCotizacionPorClave(BigDecimal cotizacionClave) {
+        sqlSession.delete(
+                "com.qualitas.portal.fraudes.account.infrastructure.dao.ResultadoCotizacionDao.eliminarResultadosCotizacionPorClave",
+                cotizacionClave
+        );
+    }
 
 
+    @Override
+    public List<ResultadoCotizacion> obtenerResultadosPorRutinaYCatalogo(BigDecimal rutinaClave) {
+        return sqlSession.selectList(
+                "com.qualitas.portal.fraudes.account.infrastructure.dao.ResultadoCotizacionDao.obtenerResultadosPorRutinaYCatalogo",
+                rutinaClave
+        );
+    }
 
 
     /*

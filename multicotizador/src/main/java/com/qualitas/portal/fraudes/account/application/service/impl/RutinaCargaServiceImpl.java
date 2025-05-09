@@ -6,6 +6,7 @@ import com.qualitas.portal.fraudes.account.application.dto.RutinaCargaDTO;
 import com.qualitas.portal.fraudes.account.application.dto.response.EstadisticasTiempoEjecucionDTO;
 import com.qualitas.portal.fraudes.account.application.service.ResultadoCotizacionService;
 import com.qualitas.portal.fraudes.account.application.service.RutinaCargaService;
+import com.qualitas.portal.fraudes.account.domain.model.ResultadoCotizacion;
 import com.qualitas.portal.fraudes.account.domain.model.RutinaCarga;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -117,27 +118,75 @@ public class RutinaCargaServiceImpl implements RutinaCargaService {
     }
 
     @Override
+    public void actualizarEstatus(BigDecimal id, String vEstatus) {
+        RutinaCarga rutinaCarga= rutinaCargaDao.obtenerRutina(id);
+        if (rutinaCarga == null){
+            throw new RuntimeException("No se encontro la rutina de carga");
+
+        }
+        rutinaCargaDao.actualizarEstatus(id, vEstatus);
+    }
+
+    @Override
     public List<RutinaCargaDTO> listarRutinas() {
         List<RutinaCarga> rutinasModel = rutinaCargaDao.listarRutinas();
         List<RutinaCargaDTO> rutinasDTO = new ArrayList<>();
 
         for (RutinaCarga rutina : rutinasModel) {
             try {
-                int cantidadRegistros = resultadoCotizacionService.contarRegistrosPorRutina(rutina.getiRutinaCargaId());
+                // 1. Obtener todos los resultados de esta rutina
+                List<ResultadoCotizacion> resultados = resultadoCotizacionService
+                        .obtenerResultadosDeCatalogoPorRutina(rutina.getiRutinaCargaId());
+
+                // 2. Verificación más robusta de errores
+                boolean tieneErrores = false;
+                for (ResultadoCotizacion resultado : resultados) {
+                    if (resultado.getvNombreCobertura() != null &&
+                            resultado.getvNombreCobertura().equalsIgnoreCase("Error")) {
+                        tieneErrores = true;
+                        logger.debug("Encontrado resultado con error - Rutina ID: {}, Resultado ID: {}",
+                                rutina.getiRutinaCargaId(), resultado.getiResultadoCotizacionId());
+                        break;
+                    }
+                }
+
+                // 3. Verificar si existe cotización completada
+                boolean existeCompletada = !resultados.isEmpty() &&
+                        existeCotizacionCompletadaPorRutina(rutina.getiRutinaCargaId());
+
+                // 4. Determinar el estado final (Error tiene prioridad)
+                String nuevoEstado = tieneErrores ? "Error" :
+                        (existeCompletada ? "Exitoso" : "No completado");
+
+                // 5. Actualizaciones
+                actualizarEstatus(rutina.getiRutinaCargaId(), nuevoEstado);
+                int cantidadRegistros = resultados.size();
                 actualizarDatosObtenidos(rutina.getiRutinaCargaId(), cantidadRegistros);
+
                 rutina.setiDatosObtenidos(cantidadRegistros);
-                logger.info("Rutina ID: {} - Registros contados: {}", rutina.getiRutinaCargaId(), cantidadRegistros);
+                rutina.setvEstatus(nuevoEstado);
+
+                logger.info("Rutina ID: {} - Total registros: {} - Estado: {} - Errores: {}",
+                        rutina.getiRutinaCargaId(),
+                        cantidadRegistros,
+                        nuevoEstado,
+                        tieneErrores ? "SI" : "NO");
+
                 rutinasDTO.add(rutinaCargaConvertDTO.entityToDto(rutina));
+
             } catch (Exception e) {
-                logger.error("Error procesando rutina ID: {}", rutina.getiRutinaCargaId(), e);
+                logger.error("Error procesando rutina ID: {} - {}",
+                        rutina.getiRutinaCargaId(), e.getMessage(), e);
+                actualizarEstatus(rutina.getiRutinaCargaId(), "Error");
+                rutina.setvEstatus("Error");
                 rutinasDTO.add(rutinaCargaConvertDTO.entityToDto(rutina));
             }
         }
         return rutinasDTO;
     }
-
     @Override
     public void registrarInicioEjecucion(BigDecimal rutinaId) {
+        resultadoCotizacionService.limpiarResultadosCompletadosYErrores(rutinaId);
         rutinaCargaDao.registrarInicioEjecucion(rutinaId);
     }
 
