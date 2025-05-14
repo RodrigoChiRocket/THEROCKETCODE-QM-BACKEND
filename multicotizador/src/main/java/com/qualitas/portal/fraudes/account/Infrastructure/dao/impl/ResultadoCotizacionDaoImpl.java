@@ -136,7 +136,7 @@ public class ResultadoCotizacionDaoImpl implements ResultadoCotizacionDao {
     @Override
     public void eliminarResultadosPorRutinaYEstado(BigDecimal rutinaCargaClave) {
         sqlSession.delete(
-                "com.qualitas.portal.fraudes.account.infrastructure.dao.ResultadoCotizacionDao.eliminarResultadosPorRutinaYEstado",
+                "com.qualitas.portal.fraudes.account.infrastructure.dao.ResultadoCotizacionDao.marcarResultadosComoInactivosPorRutinaYEstado",
                 rutinaCargaClave
         );
     }

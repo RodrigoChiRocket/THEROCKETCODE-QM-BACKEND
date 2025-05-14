@@ -33,6 +33,8 @@ public class ResultadoCotizacionConvertDTOImpl implements ResultadoCotizacionCon
         entity.setbAsistencialVialCarretera(dto.isbAsistencialVialCarretera());
         entity.setiDanoVehiculo(dto.getiDanoVehiculo());
         entity.setdFechaCreacion(dto.getdFechaCreacion());
+        entity.setvEstado(dto.getvEstado());
+        entity.setbRegistroActivo(dto.getbRegistroActivo());
         return entity;
     }
 
@@ -61,6 +63,8 @@ public class ResultadoCotizacionConvertDTOImpl implements ResultadoCotizacionCon
         dto.setbAsistencialVialCarretera(entity.isbAsistencialVialCarretera());
         dto.setiDanoVehiculo(entity.getiDanoVehiculo());
         dto.setdFechaCreacion(entity.getdFechaCreacion());
+        dto.setvEstado(entity.getvEstado());
+        dto.setbRegistroActivo(dto.getbRegistroActivo());
         return dto;
     }
 }

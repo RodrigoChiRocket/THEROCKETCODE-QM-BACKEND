@@ -142,7 +142,7 @@ public class RutinaCargaServiceImpl implements RutinaCargaService {
                 boolean tieneErrores = false;
                 for (ResultadoCotizacion resultado : resultados) {
                     if (resultado.getvNombreCobertura() != null &&
-                            resultado.getvNombreCobertura().equalsIgnoreCase("Error")) {
+                            resultado.getvEstado().equalsIgnoreCase("Error")) {
                         tieneErrores = true;
                         logger.debug("Encontrado resultado con error - Rutina ID: {}, Resultado ID: {}",
                                 rutina.getiRutinaCargaId(), resultado.getiResultadoCotizacionId());

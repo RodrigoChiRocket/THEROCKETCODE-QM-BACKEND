@@ -29,6 +29,27 @@ public class ResultadoCotizacion {
 
     private Integer bCatalogoDato;
 
+    private String vEstado;
+
+    private Integer bRegistroActivo;
+
+
+    public Integer getbRegistroActivo() {
+        return bRegistroActivo;
+    }
+
+    public void setbRegistroActivo(Integer bRegistroActivo) {
+        this.bRegistroActivo = bRegistroActivo;
+    }
+
+    public String getvEstado() {
+        return vEstado;
+    }
+
+    public void setvEstado(String vEstado) {
+        this.vEstado = vEstado;
+    }
+
     public Integer getbCatalogoDato() {
         return bCatalogoDato;
     }
